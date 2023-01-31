@@ -1,0 +1,12 @@
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\bin\Release\net7.0\Appusion.Core.deps.json
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\bin\Release\net7.0\Appusion.Core.dll
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\bin\Release\net7.0\Appusion.Core.pdb
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\Appusion.Core.csproj.AssemblyReference.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\Appusion.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\Appusion.Core.AssemblyInfoInputs.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\Appusion.Core.AssemblyInfo.cs
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\Appusion.Core.csproj.CoreCompileInputs.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\Appusion.Core.dll
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\refint\Appusion.Core.dll
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\Appusion.Core.pdb
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core\obj\Release\net7.0\ref\Appusion.Core.dll

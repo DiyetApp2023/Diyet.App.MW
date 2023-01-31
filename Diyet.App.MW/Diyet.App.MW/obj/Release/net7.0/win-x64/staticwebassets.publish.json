@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "09LP9EPsRAvse0L/JhUAE9yXq7XAowvYoJHVMaoEBdY=",
+  "Source": "Appusion.Core.Services.Api",
+  "BasePath": "_content/Appusion.Core.Services.Api",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
