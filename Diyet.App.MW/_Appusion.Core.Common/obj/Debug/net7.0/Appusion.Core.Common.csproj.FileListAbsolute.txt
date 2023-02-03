@@ -1,5 +1,0 @@
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Common\obj\Debug\net7.0\Appusion.Core.Common.csproj.AssemblyReference.cache
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Common\obj\Debug\net7.0\Appusion.Core.Common.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Common\obj\Debug\net7.0\Appusion.Core.Common.AssemblyInfoInputs.cache
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Common\obj\Debug\net7.0\Appusion.Core.Common.AssemblyInfo.cs
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Common\obj\Debug\net7.0\Appusion.Core.Common.csproj.CoreCompileInputs.cache
