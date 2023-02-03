@@ -1,4 +1,5 @@
-﻿using Appusion.Core.Common.Entities.Meal;
+﻿using Appusion.Core.Common.Entities.DietPlan;
+using Appusion.Core.Common.Entities.Meal;
 using Appusion.Core.Common.Entities.Product;
 using Appusion.Core.Common.Entities.User;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,8 @@ namespace Appusion.Core.Common.Implementation.DbContexts
 
         public DbSet<UserOtpEntity> UserOtp { get; set; }
 
+        public DbSet<UserSessionEntity> UserSession { get; set; }
+
         public DbSet<MealEntity> Meal { get; set; }
 
         public DbSet<ProductEntity> Product { get; set; }
@@ -23,5 +26,9 @@ namespace Appusion.Core.Common.Implementation.DbContexts
         public DbSet<ProductUnitEntity> ProductUnit { get; set; }
 
         public DbSet<ProductUnitMapEntity> ProductUnitMap { get; set; }
+
+        public DbSet<DietPlanEntity> DietPlan { get; set; }
+
+        public DbSet<UserDietPlanMapEntity> UserDietPlanMap { get; set; }
     }
 }

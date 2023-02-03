@@ -39,9 +39,6 @@ C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\RestSharp.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\RestSharp.Serializers.Newtonsoft.Json.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\RestSharp.Serializers.NewtonsoftJson.dll
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\System.Configuration.ConfigurationManager.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\System.Drawing.Common.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Release\net7.0\System.IdentityModel.Tokens.Jwt.dll

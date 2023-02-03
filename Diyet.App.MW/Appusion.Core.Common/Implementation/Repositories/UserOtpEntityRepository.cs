@@ -11,11 +11,13 @@ namespace Appusion.Core.Common.Implementation.Repositories
         {
         }
 
-        public async Task<UserOtpEntity> GetUserOtpEntity(UserChangePasswordRequestPackage userChangePasswordRequestPackage)
+        public async Task<UserOtpEntity> GetUserOtpEntity(GetUserOtpEntityRequestPackage getUserOtpEntityRequestPackage)
         {
             var userOtpEntity = (from user in DbContext.User
                               join userOtp in DbContext.UserOtp on user.Id equals userOtp.UserId
-                              where (userOtp.OtpCode == userChangePasswordRequestPackage.OtpCode && user.EmailAddress == userChangePasswordRequestPackage.EmailAddress)
+                              where (userOtp.OtpCode == getUserOtpEntityRequestPackage.OtpCode && 
+                              user.EmailAddress == getUserOtpEntityRequestPackage.EmailAddress && 
+                              userOtp.ExpirationDate> DateTime.Now)
                               select userOtp).FirstOrDefault();
             return userOtpEntity;
         }

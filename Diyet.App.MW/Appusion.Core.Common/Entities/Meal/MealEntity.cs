@@ -12,7 +12,7 @@ namespace Appusion.Core.Common.Entities.Meal
     /// MealEntity
     /// </summary>
     [Table("Meal", Schema = "Diet")]
-    public class MealEntity: EntityBase
+    public class MealEntity : EntityBase
     {
         public int Id { get; set; }
 

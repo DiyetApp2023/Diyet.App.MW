@@ -8,6 +8,6 @@ namespace Appusion.Core.Common.ResponseModels.General
 {
     public class GenericServiceResponsePackage
     {
-        public bool Success { get; set; }
+        public bool Success { get; set; } = false;
     }
 }

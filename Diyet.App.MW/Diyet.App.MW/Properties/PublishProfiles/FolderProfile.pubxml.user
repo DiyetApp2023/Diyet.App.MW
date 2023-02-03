@@ -6,7 +6,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>C:\Release\Appusion.Core.Services.Api</_PublishTargetUrl>
-    <History>True|2023-01-30T12:45:24.5047657Z;</History>
+    <History>True|2023-02-03T20:23:18.5001581Z;True|2023-02-03T17:33:53.6858867+03:00;True|2023-02-01T22:46:56.1380587+03:00;True|2023-02-01T22:26:57.5115557+03:00;True|2023-02-01T21:30:21.9634159+03:00;True|2023-01-31T23:24:03.5752656+03:00;True|2023-01-31T17:21:51.9340613+03:00;True|2023-01-30T15:45:24.5047657+03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>

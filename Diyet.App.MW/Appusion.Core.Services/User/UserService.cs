@@ -40,6 +40,22 @@ namespace Appusion.Core.Services.User
             });
         }
 
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SendOtp(SendOtpRequestPackage sendOtpRequestPackage)
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _userComponent.SendOtp(sendOtpRequestPackage).Result;
+            });
+        }
+
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> VerifyOtp(VerifyOtpRequestPackage verifyOtpRequestPackage)
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _userComponent.VerifyOtp(verifyOtpRequestPackage).Result;
+            });
+        }
+
         public async Task<GenericServiceResult<GenericServiceResponsePackage>> ActivateUser(UserActivationRequestPackage userActivationRequestPackage)
         {
             return await this.RunSafelyAsync(() =>

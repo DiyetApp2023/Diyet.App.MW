@@ -14,5 +14,7 @@ namespace Appusion.Core.Common.Interface.Repositories
         Task<List<ProductEntity>> GetAllProductList();
 
         Task<List<ProductEntity>> GetSearchedProductList(string searchedProduct);
+        
+        Task<List<ProductUnitEntity>> GetSelectedProductUnitList(int productId);
     }
 }

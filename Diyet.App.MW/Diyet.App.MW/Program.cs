@@ -15,6 +15,8 @@ using Appusion.Core.Services.User;
 using Appusion.Core.Services.Jwt;
 using Appusion.Core.Services.Meal;
 using Appusion.Core.Services.Product;
+using Appusion.Core.Services.DietPlan;
+using Appusion.Core.Common.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +27,7 @@ var configuration = provider.GetRequiredService<IConfiguration>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
 builder.Services.InstallJwtParameters(configuration);
 builder.Services.InstallAppusionDietDbContext(configuration);
 builder.Services.InstallMailSettings(configuration);
@@ -39,6 +40,7 @@ builder.Services.AddCors(p => p.AddPolicy("CorsPolicy", builder =>
 builder.Services.AddScoped<IServiceCaller, ServiceCaller>();
 builder.Services.AddScoped<IUserEntityRepository, UserEntityRepository>();
 builder.Services.AddScoped<IUserOtpEntityRepository, UserOtpEntityRepository>();
+builder.Services.AddScoped<IUserSessionRepository, UserSessionRepository>();
 builder.Services.AddScoped<RestClient>();
 builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<RestHelper>();
@@ -56,7 +58,10 @@ builder.Services.AddScoped<IMailService, MailService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMealService, MealService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IDietPlanService, DietPlanService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IDietPlanRepository, DietPlanRepository>();
+builder.Services.AddScoped<IUserDietPlanMapRepository, UserDietPlanMapRepository>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserActivationEntityRepository, UserActivationEntityRepository>();
 builder.Services.AddScoped<IMealEntityRepository, MealEntityRepository>();
@@ -69,6 +74,20 @@ builder.Services.AddScoped<JwtHelper>();
 builder.Services.AddScoped<UserComponent>();
 builder.Services.AddScoped<MealComponent>();
 builder.Services.AddScoped<ProductComponent>();
+builder.Services.AddScoped<DietPlanComponent>();
+//builder.Services.AddScoped<CurrentUser>((serviceProvider) =>
+//{
+//    var httpContext = (serviceProvider.GetService(typeof(IHttpContextAccessor)) as IHttpContextAccessor)
+//    ?.HttpContext;
+//    return (CurrentUser)httpContext.Items["User"];
+//});
+
+builder.Services.AddScoped<CurrentUser>((serviceProvider) =>
+{
+    return CurrentUser.Create(serviceProvider);
+});
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
@@ -83,12 +102,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
 }
 
 app.UseCors("CorsPolicy");
-//app.UseMiddleware<JwtMiddleware>();
+app.UseMiddleware<JwtMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 

@@ -2,6 +2,7 @@
 using Appusion.Core.Common.Entities.Product;
 using Appusion.Core.Common.Implementation.DbContexts;
 using Appusion.Core.Common.Interface.Repositories;
+using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels.Product;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,16 @@ namespace Appusion.Core.Common.Implementation.Repositories
         public async Task<List<ProductEntity>> GetSearchedProductList(string searchedProduct)
         {
             return DbContext.Product.Where(p=>p.ProductName.StartsWith(searchedProduct)).ToList();
+        }
+
+        public async Task<List<ProductUnitEntity>> GetSelectedProductUnitList(int productId)
+        {
+            var productUnitEntity = (from product in DbContext.Product
+                              join productUnitMap in DbContext.ProductUnitMap on product.Id equals productUnitMap.ProductId
+                              join productUnit in DbContext.ProductUnit on productUnitMap.UnitId equals productUnit.Id
+                              where (product.Id == productId)
+                              select productUnit).ToList();
+            return productUnitEntity;
         }
     }
 }

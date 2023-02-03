@@ -1,6 +1,5 @@
 ﻿using Appusion.Core.BaseModels;
 using Appusion.Core.Common.Entities.User;
-using Appusion.Core.Common.Implementation.Repositories;
 using Appusion.Core.Common.Interface.Repositories;
 using Appusion.Core.Common.Interface.Services;
 using Appusion.Core.Common.ParameterModels.Email;
@@ -9,6 +8,7 @@ using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels;
 using Appusion.Core.Common.ResponseModels.General;
 using Appusion.Core.Common.ResponseModels.User;
+using Appusion.Core.Common.Utility;
 using Appusion.Core.ExceptionBase;
 using Appusion.Core.Services.Base;
 using AutoMapper;
@@ -30,13 +30,15 @@ namespace Appusion.Core.Services.User
         private readonly IUserActivationEntityRepository _userActivationRepository;
         private readonly IOptions<UserParameter> _userParameters;
         private readonly IUserOtpEntityRepository _userOtpRepository;
+        private readonly IUserSessionRepository _userSessionRepository;
         public UserComponent(IJwtUtils jwtUtils,
             IMapper mapper,
             IUserEntityRepository userEntityRepository,
             IMailService mailService,
             IUserActivationEntityRepository userActivationRepository,
             IOptions<UserParameter> userParameters,
-            IUserOtpEntityRepository userOtpRepository
+            IUserOtpEntityRepository userOtpRepository,
+            IUserSessionRepository userSessionRepository
             )
         {
             _jwtUtils = jwtUtils;
@@ -46,6 +48,7 @@ namespace Appusion.Core.Services.User
             _userActivationRepository = userActivationRepository;
             _userParameters = userParameters;
             _userOtpRepository = userOtpRepository;
+            _userSessionRepository = userSessionRepository;
         }
 
         public async Task<UserAuthenticateResponsePackage> Authenticate(UserAuthenticateRequestPackage authenticateRequest)
@@ -57,6 +60,7 @@ namespace Appusion.Core.Services.User
             }
             var response = _mapper.Map<UserAuthenticateResponsePackage>(userEntity);
             response.Token = _jwtUtils.GenerateToken(userEntity);
+            _userSessionRepository.Insert(new UserSessionEntity { JwtToken=response.Token,UserId=userEntity.Id});
             return response;
         }
 
@@ -71,20 +75,67 @@ namespace Appusion.Core.Services.User
             user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegisterRequestPackage.Password);
             user.FullName = userRegisterRequestPackage.FirstName + " " + userRegisterRequestPackage.LastName;
             await _userEntityRepository.SaveUserEntity(user);
-            var activationCode = Guid.NewGuid().ToString();
-            await _userActivationRepository.SaveUserActivation(new UserActivationEntity
-            {
-                UserId = user.Id,
-                ActivationCode = activationCode
-            });
+            //var activationCode = Guid.NewGuid().ToString();
+            //await _userActivationRepository.SaveUserActivation(new UserActivationEntity
+            //{
+            //    UserId = user.Id,
+            //    ActivationCode = activationCode
+            //});
+            
+            //var mailRequest = new Common.RequestModels.Email.MailRequest
+            //{
+            //    Subject = "Confirmation email for account activation",
+            //    Body = "Sayın " + user.FullName + ", Hesabınızı aktifleştirmek için gerekli doğrulama kodunuz: " + OtpHelper.GenerateOtpCode + " Lütfen güvenlik açısından doğrulama kodunuzu kimseyle paylaşmayınız.",
+            //    ToEmail = userRegisterRequestPackage.EmailAddress,
+            //    ToName = user.FullName
+            //};
+            //await _mailService.SendEmailByNetSmtp(mailRequest);
+            return new GenericServiceResponsePackage { Success = true };
+        }
+
+        /// <summary>
+        /// SendOtp
+        /// </summary>
+        /// <param name="sendOtpRequestPackage"></param>
+        /// <returns></returns>
+        public async Task<GenericServiceResponsePackage> SendOtp(SendOtpRequestPackage sendOtpRequestPackage)
+        {
+            var userEntity = await _userEntityRepository.GetUserEntity(sendOtpRequestPackage.EmailAddress);
+            var otpCode = OtpHelper.GenerateOtpCode;
             var mailRequest = new Common.RequestModels.Email.MailRequest
             {
                 Subject = "Confirmation email for account activation",
-                Body = _userParameters.Value.ActivationBaseUrl + "?activationCode=" + activationCode,
-                ToEmail = userRegisterRequestPackage.EmailAddress,
-                ToName = user.FullName
+                Body = "Sayın " + userEntity.FullName + ", Hesabınızı aktifleştirmek için gerekli doğrulama kodunuz: " + otpCode + " Lütfen güvenlik açısından doğrulama kodunuzu kimseyle paylaşmayınız.",
+                ToEmail = sendOtpRequestPackage.EmailAddress,
+                ToName = userEntity.FullName
             };
+            _userOtpRepository.Insert(new UserOtpEntity { OtpCode = otpCode, UserId = userEntity.Id });
             await _mailService.SendEmailByNetSmtp(mailRequest);
+            return new GenericServiceResponsePackage { Success = true };
+        }
+
+        /// <summary>
+        /// VerifyOtp
+        /// </summary>
+        /// <param name="verifyOtpRequestPackage"></param>
+        /// <returns></returns>
+        /// <exception cref="ApiException"></exception>
+        public async Task<GenericServiceResponsePackage> VerifyOtp(VerifyOtpRequestPackage verifyOtpRequestPackage)
+        {
+            var userEntity = await _userEntityRepository.GetUserEntity(verifyOtpRequestPackage.EmailAddress);
+            if (userEntity == null)
+            {
+                throw new ApiException("Girilen E-mail adresine kayıtlı bir kullanıcı bulunamadı.");
+            }
+            var getUserOtpEntityRequestPackage = _mapper.Map<VerifyOtpRequestPackage, GetUserOtpEntityRequestPackage>(verifyOtpRequestPackage);
+            var userOtpEntity = await _userOtpRepository.GetUserOtpEntity(getUserOtpEntityRequestPackage);
+            if (userOtpEntity != null)
+            {
+                userEntity.EmailAddressConfirmed = true;
+                userOtpEntity.ExpirationDate = DateTime.UtcNow;
+                _userEntityRepository.Update(userEntity);
+                _userOtpRepository.Update(userOtpEntity);
+            }
             return new GenericServiceResponsePackage { Success = true };
         }
 
@@ -126,7 +177,8 @@ namespace Appusion.Core.Services.User
 
         public async Task<GenericServiceResponsePackage> ChangePassword(UserChangePasswordRequestPackage userChangePasswordRequestPackage)
         {
-            var userOtpEntity = await _userOtpRepository.GetUserOtpEntity(userChangePasswordRequestPackage);
+            var getUserOtpEntityRequestPackage = _mapper.Map<UserChangePasswordRequestPackage, GetUserOtpEntityRequestPackage>(userChangePasswordRequestPackage);
+            var userOtpEntity = await _userOtpRepository.GetUserOtpEntity(getUserOtpEntityRequestPackage);
             if (userOtpEntity != null)
             {
                 var userEntity = await _userEntityRepository.GetUserEntityById(userOtpEntity.UserId);

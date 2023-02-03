@@ -36,5 +36,11 @@ namespace Appusion.Core.Services.Product
             var searchedProductEntityList = await _productRepository.GetSearchedProductList(getSearchedProductListRequestPackage.SearchedProduct);
             return _mapper.Map<List<ProductEntity>, List<GetAllProductListResponsePackage>>(searchedProductEntityList);
         }
+
+        public async Task<List<GetSelectedProductUnitListResponsePackage>> GetSelectedProductUnitList(GetSelectedProductUnitListRequestPackage getSelectedProductUnitListRequestPackage)
+        {
+            var productUnitEntityList = await _productRepository.GetSelectedProductUnitList(getSelectedProductUnitListRequestPackage.ProductId);
+            return _mapper.Map<List<ProductUnitEntity>, List<GetSelectedProductUnitListResponsePackage>>(productUnitEntityList);
+        }
     }
 }

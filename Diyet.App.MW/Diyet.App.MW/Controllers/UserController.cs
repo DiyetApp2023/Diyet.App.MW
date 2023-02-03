@@ -40,6 +40,31 @@ namespace Appusion.Core.Services.Api.Controllers
         }
 
         /// <summary>
+        /// SendOtp
+        /// </summary>
+        /// <param name="sendOtpRequestPackage"></param>
+        /// <returns></returns>
+        [Route("api/user/sendotp")]
+        [HttpPost]
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SendOtp([FromBody] SendOtpRequestPackage sendOtpRequestPackage)
+        {
+            return await _userService.SendOtp(sendOtpRequestPackage);
+        }
+
+
+        /// <summary>
+        /// VerifyOtp
+        /// </summary>
+        /// <param name="verifyOtpRequestPackage"></param>
+        /// <returns></returns>
+        [Route("api/user/verifyotp")]
+        [HttpPost]
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> VerifyOtp([FromBody] VerifyOtpRequestPackage verifyOtpRequestPackage)
+        {
+            return await _userService.VerifyOtp(verifyOtpRequestPackage);
+        }
+
+        /// <summary>
         /// Authenticate
         /// </summary>
         /// <param name="userAuthenticateRequestPackage"></param>

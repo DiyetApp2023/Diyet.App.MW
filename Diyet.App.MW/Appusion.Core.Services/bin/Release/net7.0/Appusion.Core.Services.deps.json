@@ -807,6 +807,10 @@
         }
       },
       "Appusion.Core/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0"
+        },
         "runtime": {
           "Appusion.Core.dll": {}
         }

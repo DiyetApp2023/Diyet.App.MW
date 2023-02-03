@@ -17,6 +17,8 @@ namespace Appusion.Core.Common.Interface.Services
     {
         Task<GenericServiceResult<UserAuthenticateResponsePackage>> Authenticate(UserAuthenticateRequestPackage userAuthenticateRequestPackage);
         Task<GenericServiceResult<GenericServiceResponsePackage>> Register(UserRegisterRequestPackage userRegisterRequestPackage);
+        Task<GenericServiceResult<GenericServiceResponsePackage>> SendOtp(SendOtpRequestPackage sendOtpRequestPackage);
+        Task<GenericServiceResult<GenericServiceResponsePackage>> VerifyOtp(VerifyOtpRequestPackage verifyOtpRequestPackage);
         Task<GenericServiceResult<GenericServiceResponsePackage>> ActivateUser(UserActivationRequestPackage userActivationRequestPackage);
         Task<GenericServiceResult<GenericServiceResponsePackage>> ForgotPassword(UserForgotPasswordRequestPackage userForgotPasswordRequestPackage);
         Task<GenericServiceResult<GenericServiceResponsePackage>> ChangePassword(UserChangePasswordRequestPackage userChangePasswordRequestPackage);

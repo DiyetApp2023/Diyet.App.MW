@@ -6,6 +6,6 @@ namespace Appusion.Core.Common.Interface.Repositories
 {
     public interface IUserOtpEntityRepository : IGenericRepository<UserOtpEntity>
     {
-        Task<UserOtpEntity> GetUserOtpEntity(UserChangePasswordRequestPackage userChangePasswordRequestPackage);
+        Task<UserOtpEntity> GetUserOtpEntity(GetUserOtpEntityRequestPackage getUserOtpEntityRequestPackage);
     }
 }

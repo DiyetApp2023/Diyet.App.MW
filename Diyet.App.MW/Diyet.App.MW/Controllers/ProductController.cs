@@ -48,5 +48,20 @@ namespace Appusion.Core.Services.Api.Controllers
         {
             return await _productService.GetSearchedProductList(getSearchedProductListRequestPackage);
         }
+
+
+        /// <summary>
+        /// GetSelectedProductUnitList
+        /// </summary>
+        /// <param name="getSelectedProductUnitsRequestPackage"></param>
+        /// <returns></returns>
+        [Route("api/product/getselectedproductunitlist")]
+        [HttpPost]
+        public async Task<GenericServiceResult<List<GetSelectedProductUnitListResponsePackage>>> GetSelectedProductUnitList([FromBody] GetSelectedProductUnitListRequestPackage getSelectedProductUnitListRequestPackage)
+        {
+            return await _productService.GetSelectedProductUnitList(getSelectedProductUnitListRequestPackage);
+        }
+
+        // TODO : Bir kişinin her bir öğünde tüketeceği ürünler ve bu ürünlerin birimleri ve miktarlarını dönen servis
     }
 }

@@ -35,5 +35,13 @@ namespace Appusion.Core.Services.Product
                 return _productComponent.GetSearchedProductList(getSearchedProductListRequestPackage).Result;
             });
         }
+
+        public async Task<GenericServiceResult<List<GetSelectedProductUnitListResponsePackage>>> GetSelectedProductUnitList(GetSelectedProductUnitListRequestPackage getSelectedProductUnitListRequestPackage)
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _productComponent.GetSelectedProductUnitList(getSelectedProductUnitListRequestPackage).Result;
+            });
+        }
     }
 }
