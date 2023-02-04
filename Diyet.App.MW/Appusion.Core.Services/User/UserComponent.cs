@@ -75,21 +75,6 @@ namespace Appusion.Core.Services.User
             user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegisterRequestPackage.Password);
             user.FullName = userRegisterRequestPackage.FirstName + " " + userRegisterRequestPackage.LastName;
             await _userEntityRepository.SaveUserEntity(user);
-            //var activationCode = Guid.NewGuid().ToString();
-            //await _userActivationRepository.SaveUserActivation(new UserActivationEntity
-            //{
-            //    UserId = user.Id,
-            //    ActivationCode = activationCode
-            //});
-            
-            //var mailRequest = new Common.RequestModels.Email.MailRequest
-            //{
-            //    Subject = "Confirmation email for account activation",
-            //    Body = "Sayın " + user.FullName + ", Hesabınızı aktifleştirmek için gerekli doğrulama kodunuz: " + OtpHelper.GenerateOtpCode + " Lütfen güvenlik açısından doğrulama kodunuzu kimseyle paylaşmayınız.",
-            //    ToEmail = userRegisterRequestPackage.EmailAddress,
-            //    ToName = user.FullName
-            //};
-            //await _mailService.SendEmailByNetSmtp(mailRequest);
             return new GenericServiceResponsePackage { Success = true };
         }
 

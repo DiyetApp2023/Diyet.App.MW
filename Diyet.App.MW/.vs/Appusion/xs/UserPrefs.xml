@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{6BAFAC0F-7630-486C-8BAC-46ECC36911F1}|https">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Appusion.Core/ExceptionBase/ApiException.cs">
+    <Files>
+      <File FileName="Appusion.Core/ExceptionBase/ApiException.cs" Line="13" Column="19" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Appusion" expanded="True">
+            <Node name="Appusion.Core" expanded="True">
+              <Node name="ExceptionBase" expanded="True">
+                <Node name="ApiException.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Appusion.Core.Services.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+</Properties>
