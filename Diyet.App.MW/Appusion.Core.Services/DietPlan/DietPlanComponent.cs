@@ -63,6 +63,7 @@ namespace Appusion.Core.Services.DietPlan
             return _mapper.Map<DietPlanEntity, GetDietPlanResponsePackage>(dietPlanEntity);
         }
 
+
         public async Task<GenericServiceResponsePackage> SaveUserDietMealPlan(SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage)
         {
             var userDietPlanDetailEntity = _mapper.Map<SaveUserDietMealPlanRequestPackage, UserDietPlanDetailEntity>(saveUserDietMealPlanRequestPackage);
