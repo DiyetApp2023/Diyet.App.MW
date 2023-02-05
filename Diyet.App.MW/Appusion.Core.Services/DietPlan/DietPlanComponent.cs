@@ -68,8 +68,9 @@ namespace Appusion.Core.Services.DietPlan
             var userDietPlanDetailEntity = _mapper.Map<SaveUserDietMealPlanRequestPackage, UserDietPlanDetailEntity>(saveUserDietMealPlanRequestPackage);
             if (userDietPlanDetailEntity!=null)
             {
-
+                _userDietPlanDetailRepository.Insert(userDietPlanDetailEntity);
             }
+            return new GenericServiceResponsePackage { Success = true };
 
         }
     }
