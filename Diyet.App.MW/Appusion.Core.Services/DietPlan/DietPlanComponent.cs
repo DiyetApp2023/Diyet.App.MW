@@ -72,7 +72,7 @@ namespace Appusion.Core.Services.DietPlan
                 _userDietPlanDetailRepository.Insert(userDietPlanDetailEntity);
             }
             return new GenericServiceResponsePackage { Success = true };
-
+           // test
         }
     }
 }
