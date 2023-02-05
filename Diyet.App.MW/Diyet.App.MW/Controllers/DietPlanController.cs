@@ -9,6 +9,7 @@ using Appusion.Core.Common.ResponseModels.General;
 using Appusion.Core.Common.ResponseModels.Meal;
 using Appusion.Core.Common.ResponseModels.Product;
 using Appusion.Core.Services.User;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Appusion.Core.Services.Api.Controllers
@@ -54,5 +55,17 @@ namespace Appusion.Core.Services.Api.Controllers
         }
 
         // TODO : Bir kişinin her bir öğünde tüketeceği ürünler ve bu ürünlerin birimleri ve miktarlarını dönen servis
+
+        /// <summary>
+        /// SaveUserDietMealPlan
+        /// </summary>
+        /// <param name="saveUserDietMealPlanRequestPackage"></param>
+        /// <returns></returns>
+        [Route("api/dietplan/saveuserdietmealplan")]
+        [HttpGet]
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDietMealPlan(SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage)
+        {
+            return await _dietPlanService.SaveUserDietMealPlan(saveUserDietMealPlanRequestPackage);
+        }
     }
 }

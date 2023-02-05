@@ -1,4 +1,4 @@
-﻿namespace Appusion.Core.Common.Entities.User
+﻿namespace Appusion.Core.Common.Base
 {
     public class EntityBase { }
 }

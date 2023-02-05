@@ -10,5 +10,6 @@ namespace Appusion.Core.Common.Interface.Services
     {
         Task<GenericServiceResult<GetDietPlanResponsePackage>> GetDietPlan();
         Task<GenericServiceResult<GenericServiceResponsePackage>> SaveDietPlan(SaveDietPlanRequestPackage saveDietPlanRequestPackage);
+        Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserMealPlan();
     }
 }
