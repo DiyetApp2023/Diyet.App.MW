@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
 using System.Text.Json.Serialization;
+using Appusion.Core.Common.Base;
 
 namespace Appusion.Core.Common.Entities.User
 {

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-
+using Appusion.Core.Common.Base;
 
 namespace Appusion.Core.Common.Entities.User
 {

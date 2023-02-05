@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Appusion.Core.Common.Base;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
