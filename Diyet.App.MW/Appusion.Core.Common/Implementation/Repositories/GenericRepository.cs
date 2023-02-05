@@ -3,7 +3,7 @@ using Appusion.Core.Common.Implementation.DbContexts;
 using Appusion.Core.Common.Interface.Repositories;
 
 using System.Linq.Expressions;
-using Appusion.Core.Common.Entities.User;
+using Appusion.Core.Common.Base;
 
 namespace Appusion.Core.Common.Implementation.Repositories
 {

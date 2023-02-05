@@ -49,5 +49,13 @@ namespace Appusion.Core.Services.DietPlan
                 return _dietPlanComponent.GetDietPlan().Result;
             });
         }
+
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDietMealPlan(SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage)
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _dietPlanComponent.SaveUserDietMealPlan(saveUserDietMealPlanRequestPackage).Result;
+            });
+        }
     }
 }

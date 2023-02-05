@@ -1,51 +1,67 @@
 ﻿<Properties StartupConfiguration="{6BAFAC0F-7630-486C-8BAC-46ECC36911F1}|https">
-  <MonoDevelop.Ide.ItemProperties.Appusion.Core.Services.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/Controllers/UserController.cs" relfile="Diyet.App.MW/Controllers/UserController.cs" line="39" column="1" />
-      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserService.cs" relfile="Appusion.Core.Services/User/UserService.cs" line="39" column="1" />
-      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserComponent.cs" relfile="Appusion.Core.Services/User/UserComponent.cs" line="69" column="1" />
-      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserComponent.cs" relfile="Appusion.Core.Services/User/UserComponent.cs" line="71" column="1" />
-      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserComponent.cs" relfile="Appusion.Core.Services/User/UserComponent.cs" line="70" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Diyet.App.MW/Controllers/DietPlanController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Appusion.Core.Common/Interface/Repositories/IUserDietPlanDetailRepository.cs">
     <Files>
       <File FileName="Appusion.Core/ExceptionBase/ApiException.cs" />
       <File FileName="Diyet.App.MW/Controllers/UserController.cs" />
       <File FileName="Appusion.Core.Services/User/UserService.cs" />
       <File FileName="Appusion.Core.Services/User/UserComponent.cs" />
       <File FileName="Appusion.Core.Common/ResponseModels/General/GenericServiceResponsePackage.cs" />
-      <File FileName="Diyet.App.MW/appsettings.json" Line="12" Column="51" />
-      <File FileName="Diyet.App.MW/Controllers/DietPlanController.cs" Line="64" Column="52" />
+      <File FileName="Diyet.App.MW/appsettings.json" />
+      <File FileName="Diyet.App.MW/Controllers/DietPlanController.cs" Line="68" Column="52" />
       <File FileName="Diyet.App.MW/Controllers/MealController.cs" Line="36" Column="50" />
-      <File FileName="Appusion.Core.Services/Meal/MealService.cs" Line="27" Column="46" />
-      <File FileName="Appusion.Core.Services/Meal/MealComponent.cs" Line="28" Column="41" />
-      <File FileName="Appusion.Core.Common/Entities/Meal/MealEntity.cs" Line="15" Column="18" />
-      <File FileName="Appusion.Core.Common/Interface/Services/IDietPlanService.cs" Line="15" Column="2" />
+      <File FileName="Appusion.Core.Services/Meal/MealService.cs" />
+      <File FileName="Appusion.Core.Services/Meal/MealComponent.cs" />
+      <File FileName="Appusion.Core.Common/Entities/Meal/MealEntity.cs" />
+      <File FileName="Appusion.Core.Common/Interface/Services/IDietPlanService.cs" Line="13" Column="159" />
+      <File FileName="Diyet.App.MW/Controllers/ProductController.cs" Line="1" Column="1" />
+      <File FileName="Appusion.Core.Common/RequestModels/DietPlan/SaveUserDietMealPlanRequestPackage.cs" Line="14" Column="2" />
+      <File FileName="Appusion.Core.Common/Entities/DietPlan/UserDietPlanDetailEntity.cs" Line="11" Column="18" />
+      <File FileName="Appusion.Core.Common/Entities/DietPlan/DietPlanEntity.cs" Line="1" Column="28" />
+      <File FileName="Appusion.Core.Common/Base/CurrentUser.cs" Line="1" Column="1" />
+      <File FileName="Appusion.Core.Common/Entities/User/EntityBase.cs" Line="1" Column="1" />
+      <File FileName="Appusion.Core.Common/Entities/User/UserEntity.cs" Line="6" Column="1" />
+      <File FileName="Appusion.Core.Common/Mapping/MappingProfile.cs" Line="43" Column="100" />
+      <File FileName="Appusion.Core.Common/RequestModels/DietPlan/SaveDietPlanRequestPackage.cs" Line="1" Column="1" />
+      <File FileName="Appusion.Core.Services/DietPlan/DietPlanService.cs" Line="57" Column="53" />
+      <File FileName="Appusion.Core.Services/DietPlan/DietPlanComponent.cs" Line="30" Column="55" />
+      <File FileName="Appusion.Core.Common/Entities/DietPlan/UserDietPlanMapEntity.cs" Line="1" Column="28" />
+      <File FileName="Appusion.Core.Common/Interface/Repositories/IUserDietPlanDetailRepository.cs" Line="12" Column="1" />
+      <File FileName="Appusion.Core.Common/Interface/Repositories/IUserActivationEntityRepository.cs" Line="1" Column="1" />
+      <File FileName="Appusion.Core.Common/Interface/Repositories/IUserDietPlanMapRepository.cs" Line="1" Column="1" />
+      <File FileName="Appusion.Core.Common/Interface/Repositories/IGenericRepository.cs" Line="1" Column="32" />
+      <File FileName="Appusion.Core.Common/Implementation/Repositories/UserDietPlanDetailRepository.cs" Line="8" Column="138" />
+      <File FileName="Appusion.Core.Common/Implementation/Repositories/GenericRepository.cs" Line="6" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Appusion" expanded="True">
+          <Node name="Appusion" expanded="True" selected="True">
             <Node name="Appusion.Core" expanded="True">
               <Node name="ExceptionBase" expanded="True" />
             </Node>
             <Node name="Appusion.Core.Common" expanded="True">
+              <Node name="Base" expanded="True" />
               <Node name="Entities" expanded="True">
-                <Node name="Meal" expanded="True" />
+                <Node name="DietPlan" expanded="True" />
+                <Node name="User" expanded="True" />
+              </Node>
+              <Node name="Implementation" expanded="True">
+                <Node name="Repositories" expanded="True" />
               </Node>
               <Node name="Interface" expanded="True">
+                <Node name="Repositories" expanded="True" />
                 <Node name="Services" expanded="True" />
+              </Node>
+              <Node name="Mapping" expanded="True" />
+              <Node name="RequestModels" expanded="True">
+                <Node name="DietPlan" expanded="True" />
               </Node>
               <Node name="ResponseModels" expanded="True">
                 <Node name="General" expanded="True" />
               </Node>
             </Node>
             <Node name="Appusion.Core.Services" expanded="True">
+              <Node name="DietPlan" expanded="True" />
               <Node name="Meal" expanded="True" />
               <Node name="User" expanded="True" />
             </Node>
@@ -58,4 +74,17 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/Controllers/UserController.cs" relfile="Diyet.App.MW/Controllers/UserController.cs" line="39" column="1" />
+      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserService.cs" relfile="Appusion.Core.Services/User/UserService.cs" line="39" column="1" />
+      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserComponent.cs" relfile="Appusion.Core.Services/User/UserComponent.cs" line="69" column="1" />
+      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserComponent.cs" relfile="Appusion.Core.Services/User/UserComponent.cs" line="71" column="1" />
+      <Breakpoint file="/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/User/UserComponent.cs" relfile="Appusion.Core.Services/User/UserComponent.cs" line="70" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Appusion.Core.Services.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>

@@ -62,8 +62,8 @@ namespace Appusion.Core.Services.Api.Controllers
         /// <param name="saveUserDietMealPlanRequestPackage"></param>
         /// <returns></returns>
         [Route("api/dietplan/saveuserdietmealplan")]
-        [HttpGet]
-        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDietMealPlan(SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage)
+        [HttpPost]
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDietMealPlan([FromBody]SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage)
         {
             return await _dietPlanService.SaveUserDietMealPlan(saveUserDietMealPlanRequestPackage);
         }

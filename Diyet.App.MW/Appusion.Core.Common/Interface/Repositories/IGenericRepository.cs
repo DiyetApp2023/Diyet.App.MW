@@ -1,4 +1,4 @@
-﻿using Appusion.Core.Common.Entities.User;
+﻿using Appusion.Core.Common.Base;
 using System.Linq.Expressions;
 
 namespace Appusion.Core.Common.Interface.Repositories
