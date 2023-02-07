@@ -65,6 +65,8 @@ builder.Services.AddScoped<IUserDietPlanMapRepository, UserDietPlanMapRepository
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserActivationEntityRepository, UserActivationEntityRepository>();
 builder.Services.AddScoped<IMealEntityRepository, MealEntityRepository>();
+builder.Services.AddScoped<IUserDietPlanDetailRepository,UserDietPlanDetailRepository>();
+builder.Services.AddScoped<IUserDietPlanMealDetailProductMapEntityRepository, UserDietPlanMealDetailProductMapEntityRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<RestHelper>();
 builder.Services.AddScoped<RestClient>();

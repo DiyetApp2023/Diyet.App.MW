@@ -7813,36 +7813,43 @@
     ]
   },
   "packageFolders": {
-    "/Users/ahmettoprak/.nuget/packages/": {}
+    "C:\\Users\\ahmett\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services.Api.csproj",
+      "projectUniqueName": "C:\\Users\\ahmett\\source\\repos\\Diyet.App.MW\\Diyet.App.MW\\Diyet.App.MW\\Appusion.Core.Services.Api.csproj",
       "projectName": "Appusion.Core.Services.Api",
-      "projectPath": "/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services.Api.csproj",
-      "packagesPath": "/Users/ahmettoprak/.nuget/packages/",
-      "outputPath": "/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/obj/",
+      "projectPath": "C:\\Users\\ahmett\\source\\repos\\Diyet.App.MW\\Diyet.App.MW\\Diyet.App.MW\\Appusion.Core.Services.Api.csproj",
+      "packagesPath": "C:\\Users\\ahmett\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ahmett\\source\\repos\\Diyet.App.MW\\Diyet.App.MW\\Diyet.App.MW\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/ahmettoprak/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ahmett\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Common/Appusion.Core.Common.csproj": {
-              "projectPath": "/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Common/Appusion.Core.Common.csproj"
+            "C:\\Users\\ahmett\\source\\repos\\Diyet.App.MW\\Diyet.App.MW\\Appusion.Core.Common\\Appusion.Core.Common.csproj": {
+              "projectPath": "C:\\Users\\ahmett\\source\\repos\\Diyet.App.MW\\Diyet.App.MW\\Appusion.Core.Common\\Appusion.Core.Common.csproj"
             },
-            "/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/Appusion.Core.Services.csproj": {
-              "projectPath": "/Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/Appusion.Core.Services.csproj"
+            "C:\\Users\\ahmett\\source\\repos\\Diyet.App.MW\\Diyet.App.MW\\Appusion.Core.Services\\Appusion.Core.Services.csproj": {
+              "projectPath": "C:\\Users\\ahmett\\source\\repos\\Diyet.App.MW\\Diyet.App.MW\\Appusion.Core.Services\\Appusion.Core.Services.csproj"
             }
           }
         }
@@ -7897,7 +7904,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   },

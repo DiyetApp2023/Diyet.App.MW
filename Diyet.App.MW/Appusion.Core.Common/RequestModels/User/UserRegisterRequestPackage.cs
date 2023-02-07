@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Appusion.Core.Common.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Appusion.Core.Common.RequestModels.User
@@ -14,11 +15,17 @@ namespace Appusion.Core.Common.RequestModels.User
         [JsonIgnore]
         public string FullName { get; set; }
 
+        public Gender Gender  { get; set; }
+
+        public float Height { get; set; }
+
+        public float Weight { get; set; }
+
         [Required]
         public DateTime BirthDate { get; set; }
 
         [Required]
-        public string GsmNumber { get; set; }
+        public string? GsmNumber { get; set; }
 
         [Required]
         public string EmailAddress { get; set; }

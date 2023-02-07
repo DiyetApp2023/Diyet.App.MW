@@ -41,6 +41,8 @@ namespace Appusion.Core.Common.Mapping
             CreateMap<ProductUnitEntity, GetSelectedProductUnitListResponsePackage>().ReverseMap();
 
             CreateMap<SaveUserDietMealPlanRequestPackage, UserDietPlanDetailEntity>().ReverseMap();
+
+            CreateMap<UserDietPlanMealDetailProductMapRequestPackage, UserDietPlanMealDetailProductMapEntity>().ReverseMap();
         }
     }
 }

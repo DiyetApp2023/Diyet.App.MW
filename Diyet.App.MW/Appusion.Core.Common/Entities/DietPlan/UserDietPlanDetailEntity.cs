@@ -12,14 +12,8 @@ namespace Appusion.Core.Common.Entities.DietPlan
     {
         public long Id { get; set; }
 
-        public long  UserId { get; set; }
-
-        public int ProductId { get; set; }
+        public long PlanId { get; set; }
 
         public int MealId { get; set; }
-
-        public int UnitId { get; set; }
-
-        public float Quantity { get; set; }
     }
 }

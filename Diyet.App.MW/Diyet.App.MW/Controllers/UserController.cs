@@ -34,7 +34,7 @@ namespace Appusion.Core.Services.Api.Controllers
         /// <param name="userRegisterRequestPackage"></param>
         [Route("api/user/register")]
         [HttpPost]
-        public async Task<GenericServiceResult<GenericServiceResponsePackage>> Register([FromBody] UserRegisterRequestPackage userRegisterRequestPackage)
+        public async Task<GenericServiceResult<UserAuthenticateResponsePackage>> Register([FromBody] UserRegisterRequestPackage userRegisterRequestPackage)
         {
             return await _userService.Register(userRegisterRequestPackage);
         }

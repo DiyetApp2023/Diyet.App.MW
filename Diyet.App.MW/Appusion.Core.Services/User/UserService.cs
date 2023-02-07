@@ -32,7 +32,7 @@ namespace Appusion.Core.Services.User
             });
         }
 
-        public async Task<GenericServiceResult<GenericServiceResponsePackage>> Register(UserRegisterRequestPackage userRegisterRequestPackage)
+        public async Task<GenericServiceResult<UserAuthenticateResponsePackage>> Register(UserRegisterRequestPackage userRegisterRequestPackage)
         {
             return await this.RunSafelyAsync(() =>
             {

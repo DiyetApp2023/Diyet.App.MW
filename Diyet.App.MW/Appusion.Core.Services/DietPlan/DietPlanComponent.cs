@@ -22,26 +22,29 @@ namespace Appusion.Core.Services.DietPlan
         private readonly IMapper _mapper;
         private readonly CurrentUser _currentUser;
         private readonly IUserDietPlanDetailRepository _userDietPlanDetailRepository;
+        private readonly IUserDietPlanMealDetailProductMapEntityRepository _userDietPlanMealDetailProductMapEntityRepository;
 
         public DietPlanComponent(IDietPlanRepository dietPlanRepository, 
                                  IMapper mapper, 
                                  IUserDietPlanMapRepository userDietPlanMapRepository,
                                  CurrentUser currentUser,
-                                 IUserDietPlanDetailRepository userDietPlanDetailRepository)
+                                 IUserDietPlanDetailRepository userDietPlanDetailRepository,
+                                 IUserDietPlanMealDetailProductMapEntityRepository userDietPlanMealDetailProductMapEntityRepository)
         {
             _dietPlanRepository = dietPlanRepository;
             _mapper = mapper;
             _userDietPlanMapRepository = userDietPlanMapRepository;
             _currentUser = currentUser;
             _userDietPlanDetailRepository = userDietPlanDetailRepository;
+            _userDietPlanMealDetailProductMapEntityRepository = userDietPlanMealDetailProductMapEntityRepository;
         }
 
         public async Task<GenericServiceResponsePackage> SaveDietPlan(SaveDietPlanRequestPackage saveDietPlanRequestPackage)
         {
-            var dietPlanEntity=  _mapper.Map<SaveDietPlanRequestPackage, DietPlanEntity>(saveDietPlanRequestPackage);
+            var success = false;
+            var dietPlanEntity = _mapper.Map<SaveDietPlanRequestPackage, DietPlanEntity>(saveDietPlanRequestPackage);
             // todo burada transaction başlatılmalı.
-            if (dietPlanEntity!=null)
-            {
+            if (dietPlanEntity != null)
             {
                 _dietPlanRepository.Insert(dietPlanEntity);
                 if (dietPlanEntity.Id > 0)
@@ -51,10 +54,10 @@ namespace Appusion.Core.Services.DietPlan
                         PlanId = dietPlanEntity.Id,
                         UserId = _currentUser.Id
                     });
+                    success = true;
                 }
             }
-            }
-            return new GenericServiceResponsePackage { Success= true };
+            return new GenericServiceResponsePackage { Success = success };
         }
 
         public async Task<GetDietPlanResponsePackage> GetDietPlan()
@@ -66,13 +69,27 @@ namespace Appusion.Core.Services.DietPlan
 
         public async Task<GenericServiceResponsePackage> SaveUserDietMealPlan(SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage)
         {
-            var userDietPlanDetailEntity = _mapper.Map<SaveUserDietMealPlanRequestPackage, UserDietPlanDetailEntity>(saveUserDietMealPlanRequestPackage);
-            if (userDietPlanDetailEntity!=null)
+            var success = false;
+            if (saveUserDietMealPlanRequestPackage != null)
             {
-                userDietPlanDetailEntity.UserId = _currentUser.Id;
-                _userDietPlanDetailRepository.Insert(userDietPlanDetailEntity);
+                var userDietPlanDetailEntity = _mapper.Map<SaveUserDietMealPlanRequestPackage, UserDietPlanDetailEntity>(saveUserDietMealPlanRequestPackage);
+                // todo burada transaction başlatılmalı.
+                if (userDietPlanDetailEntity != null)
+                {
+                    _userDietPlanDetailRepository.Insert(userDietPlanDetailEntity);
+                    var userDietPlanMealDetailProductMapEntityList = _mapper.Map<List<UserDietPlanMealDetailProductMapRequestPackage>, List<UserDietPlanMealDetailProductMapEntity>>(saveUserDietMealPlanRequestPackage.ProductDetails);
+                    if (userDietPlanMealDetailProductMapEntityList != null)
+                    {
+                        userDietPlanMealDetailProductMapEntityList.ForEach(userDietPlanMealDetailProductMapEntity =>
+                        {
+                            userDietPlanMealDetailProductMapEntity.UserDietPlanDetailId = userDietPlanDetailEntity.Id;
+                            _userDietPlanMealDetailProductMapEntityRepository.Insert(userDietPlanMealDetailProductMapEntity);
+                        });
+                        success = true;
+                    }
+                }
             }
-            return new GenericServiceResponsePackage { Success = true };
+            return new GenericServiceResponsePackage { Success = success };
         }
     }
 }

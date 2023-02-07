@@ -64,18 +64,21 @@ namespace Appusion.Core.Services.User
             return response;
         }
 
-        public async Task<GenericServiceResponsePackage> Register(UserRegisterRequestPackage userRegisterRequestPackage)
+        public async Task<UserAuthenticateResponsePackage> Register(UserRegisterRequestPackage userRegisterRequestPackage)
         {
             var userEntity = await _userEntityRepository.GetUserEntity(userRegisterRequestPackage.EmailAddress);
             if (userEntity != null)
             {
                 throw new ApiException("EmailAddress '" + userRegisterRequestPackage.EmailAddress + "' is already taken");
             }
-            var user = _mapper.Map<UserEntity>(userRegisterRequestPackage);
-            user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegisterRequestPackage.Password);
-            user.FullName = userRegisterRequestPackage.FirstName + " " + userRegisterRequestPackage.LastName;
-            await _userEntityRepository.SaveUserEntity(user);
-            return new GenericServiceResponsePackage { Success = true };
+            userEntity = _mapper.Map<UserEntity>(userRegisterRequestPackage);
+            userEntity.HashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegisterRequestPackage.Password);
+            userEntity.FullName = userRegisterRequestPackage.FirstName + " " + userRegisterRequestPackage.LastName;
+            await _userEntityRepository.SaveUserEntity(userEntity);
+            var response = _mapper.Map<UserAuthenticateResponsePackage>(userEntity);
+            response.Token = _jwtUtils.GenerateToken(userEntity);
+            _userSessionRepository.Insert(new UserSessionEntity { JwtToken = response.Token, UserId = userEntity.Id });
+            return response;
         }
 
         /// <summary>
@@ -107,6 +110,7 @@ namespace Appusion.Core.Services.User
         /// <exception cref="ApiException"></exception>
         public async Task<GenericServiceResponsePackage> VerifyOtp(VerifyOtpRequestPackage verifyOtpRequestPackage)
         {
+            var success = false;
             var userEntity = await _userEntityRepository.GetUserEntity(verifyOtpRequestPackage.EmailAddress);
             if (userEntity == null)
             {
@@ -120,19 +124,22 @@ namespace Appusion.Core.Services.User
                 userOtpEntity.ExpirationDate = DateTime.UtcNow;
                 _userEntityRepository.Update(userEntity);
                 _userOtpRepository.Update(userOtpEntity);
+                success = true;
             }
-            return new GenericServiceResponsePackage { Success = true };
+            return new GenericServiceResponsePackage { Success = success };
         }
 
         public async Task<GenericServiceResponsePackage> ActivateUser(UserActivationRequestPackage userActivationRequestPackage)
         {
+            var success = false;
             var userEntity = await _userEntityRepository.GetUserEntityByActivationCode(userActivationRequestPackage);
             if (userEntity != null)
             {
                 userEntity.EmailAddressConfirmed = true;
                 _userEntityRepository.Update(userEntity);
+                success = true;
             }
-            return new GenericServiceResponsePackage { Success = true };
+            return new GenericServiceResponsePackage { Success = success };
         }
 
         public async Task<GenericServiceResponsePackage> ForgotPassword(UserForgotPasswordRequestPackage userForgotPasswordRequestPackage)
@@ -162,6 +169,7 @@ namespace Appusion.Core.Services.User
 
         public async Task<GenericServiceResponsePackage> ChangePassword(UserChangePasswordRequestPackage userChangePasswordRequestPackage)
         {
+            var success = false;
             var getUserOtpEntityRequestPackage = _mapper.Map<UserChangePasswordRequestPackage, GetUserOtpEntityRequestPackage>(userChangePasswordRequestPackage);
             var userOtpEntity = await _userOtpRepository.GetUserOtpEntity(getUserOtpEntityRequestPackage);
             if (userOtpEntity != null)
@@ -169,8 +177,9 @@ namespace Appusion.Core.Services.User
                 var userEntity = await _userEntityRepository.GetUserEntityById(userOtpEntity.UserId);
                 userEntity.HashedPassword = BCrypt.Net.BCrypt.HashPassword(userChangePasswordRequestPackage.Password);
                 _userEntityRepository.Update(userEntity);
+                success= true;
             }
-            return new GenericServiceResponsePackage { Success = true };
+            return new GenericServiceResponsePackage { Success = success };
         }
     }
 }

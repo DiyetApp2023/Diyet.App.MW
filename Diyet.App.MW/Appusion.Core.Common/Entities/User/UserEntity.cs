@@ -2,6 +2,7 @@
 
 using System.Text.Json.Serialization;
 using Appusion.Core.Common.Base;
+using Appusion.Core.Common.Enums;
 
 namespace Appusion.Core.Common.Entities.User
 {
@@ -16,9 +17,15 @@ namespace Appusion.Core.Common.Entities.User
         public string LastName { get; set; }
         public string FullName { get; set; }
 
+        public Gender Gender { get; set; }
+
+        public float Height { get; set; }
+
+        public float Weight { get; set; }
+
         public DateTime BirthDate { get; set; }
 
-        public string GsmNumber { get; set; }
+        public string? GsmNumber { get; set; }
 
         public string EmailAddress { get; set; }
 

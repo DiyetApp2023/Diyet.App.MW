@@ -29,9 +29,7 @@ namespace Appusion.Core.Common.Middlewares.Jwt
                     string.Equals(httpRequest.Path.Value, "/api/user/activateuser", StringComparison.OrdinalIgnoreCase) ||
                      string.Equals(httpRequest.Path.Value, "/api/user/authenticate", StringComparison.OrdinalIgnoreCase) ||
                       string.Equals(httpRequest.Path.Value, "/api/user/forgotpassword", StringComparison.OrdinalIgnoreCase) ||
-                      string.Equals(httpRequest.Path.Value, "/api/user/changepassword", StringComparison.OrdinalIgnoreCase) ||
-                      string.Equals(httpRequest.Path.Value, "/api/user/sendotp", StringComparison.OrdinalIgnoreCase) ||
-                      string.Equals(httpRequest.Path.Value, "/api/user/verifyotp", StringComparison.OrdinalIgnoreCase) 
+                      string.Equals(httpRequest.Path.Value, "/api/user/changepassword", StringComparison.OrdinalIgnoreCase) 
                     )
                 {
                     await _nextMiddleware.Invoke(httpContext);

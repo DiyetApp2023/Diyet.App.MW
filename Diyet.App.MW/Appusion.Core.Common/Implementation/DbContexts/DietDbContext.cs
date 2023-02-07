@@ -30,5 +30,9 @@ namespace Appusion.Core.Common.Implementation.DbContexts
         public DbSet<DietPlanEntity> DietPlan { get; set; }
 
         public DbSet<UserDietPlanMapEntity> UserDietPlanMap { get; set; }
+
+        public DbSet<UserDietPlanDetailEntity> UserDietPlanDetail { get; set; }
+
+        public DbSet<UserDietPlanMealDetailProductMapEntity> UserDietPlanMealDetailProductMap { get; set; }    
     }
 }
