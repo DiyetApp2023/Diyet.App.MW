@@ -63,7 +63,8 @@ namespace Appusion.Core.Services.DietPlan
         public async Task<GetDietPlanResponsePackage> GetDietPlan()
         {
             var dietPlanEntity = await _dietPlanRepository.GetActiveDietPlanEntity(_currentUser.Id);
-            return _mapper.Map<DietPlanEntity, GetDietPlanResponsePackage>(dietPlanEntity);
+            var result = _mapper.Map<DietPlanEntity, GetDietPlanResponsePackage>(dietPlanEntity);
+            return result;
         }
 
 

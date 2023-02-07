@@ -28,8 +28,8 @@ namespace Appusion.Core.Common.Implementation.Repositories
 
         public async Task<UserEntity> GetUserEntityById(long userId)
         {
-            var userEntity = DbContext.User.SingleOrDefault(x => x.Id == userId);
-            return userEntity;
+                var userEntity = DbContext.User.SingleOrDefault(x => x.Id == userId);
+                return userEntity;
         }
 
         public async Task SaveUserEntity(UserEntity userEntity)

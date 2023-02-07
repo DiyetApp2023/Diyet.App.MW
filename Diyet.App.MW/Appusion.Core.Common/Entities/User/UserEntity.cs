@@ -19,9 +19,9 @@ namespace Appusion.Core.Common.Entities.User
 
         public Gender Gender { get; set; }
 
-        public float Height { get; set; }
+        public double Height { get; set; }
 
-        public float Weight { get; set; }
+        public double Weight { get; set; }
 
         public DateTime BirthDate { get; set; }
 

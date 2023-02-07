@@ -86,6 +86,12 @@
 /Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/obj/Debug/net7.0/Appusion.Core.Services.Api.pdb
 /Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/obj/Debug/net7.0/Appusion.Core.Services.Api.genruntimeconfig.cache
 /Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Diyet.App.MW/obj/Debug/net7.0/ref/Appusion.Core.Services.Api.dll
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.csproj.AssemblyReference.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.AssemblyInfoInputs.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.AssemblyInfo.cs
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.csproj.CoreCompileInputs.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Debug\net7.0\appsettings.json
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Debug\net7.0\Appusion.Core.Services.Api.exe
@@ -153,13 +159,6 @@ C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Debug\ne
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Debug\net7.0\Appusion.Core.Common.pdb
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Debug\net7.0\Appusion.Core.Services.pdb
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\bin\Debug\net7.0\Appusion.Core.pdb
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.csproj.AssemblyReference.cache
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.AssemblyInfoInputs.cache
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.AssemblyInfo.cs
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.csproj.CoreCompileInputs.cache
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\Appusion.Core.Services.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\staticwebassets\msbuild.Appusion.Core.Services.Api.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\staticwebassets\msbuild.build.Appusion.Core.Services.Api.props
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Diyet.App.MW\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Appusion.Core.Services.Api.props
