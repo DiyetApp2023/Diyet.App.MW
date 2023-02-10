@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Appusion.Core.Services.Api.props" />
-</Project>

@@ -3,6 +3,8 @@ namespace Appusion.Core.Common.RequestModels.DietPlan
 {
 	public class SaveUserDietMealPlanRequestPackage
 	{
+		public long Id { get; set; }
+
 		public long PlanId { get; set; }
 
 		public int  MealId { get; set; }

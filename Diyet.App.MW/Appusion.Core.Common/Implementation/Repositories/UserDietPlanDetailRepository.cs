@@ -10,6 +10,15 @@ namespace Appusion.Core.Common.Implementation.Repositories
         public UserDietPlanDetailRepository(DietDbContext context) : base(context)
         {
         }
+
+        public async Task<UserDietPlanDetailEntity> GetUserDietPlanDetailEntity(long userId, long planId, int mealId)
+        {
+            var userDietPlanDetailEntity = (from userDietPlanDetail in DbContext.UserDietPlanDetail
+                                            join userDietPlanMap in DbContext.UserDietPlanMap on userDietPlanDetail.PlanId equals userDietPlanMap.PlanId
+                                            where userDietPlanDetail.PlanId == planId && userDietPlanDetail.MealId == mealId && userDietPlanMap.UserId == userId
+                                            select userDietPlanDetail).FirstOrDefault();
+            return userDietPlanDetailEntity;
+        }
     }
 }
 

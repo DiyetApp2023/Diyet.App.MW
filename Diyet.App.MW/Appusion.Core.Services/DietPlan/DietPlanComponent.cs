@@ -97,19 +97,36 @@ namespace Appusion.Core.Services.DietPlan
                 // todo burada transaction başlatılmalı.
                 if (userDietPlanDetailEntity != null)
                 {
-                    await _userDietPlanDetailRepository.Insert(userDietPlanDetailEntity);
+                    if (userDietPlanDetailEntity.Id <= 0)
+                    {
+                        await _userDietPlanDetailRepository.Insert(userDietPlanDetailEntity);
+                    }
+                    else
+                    {
+                        await _userDietPlanDetailRepository.Update(userDietPlanDetailEntity);
+                    }
+
                     var userDietPlanMealDetailProductMapEntityList = _mapper.Map<List<UserDietPlanMealDetailProductMapRequestPackage>, List<UserDietPlanMealDetailProductMapEntity>>(saveUserDietMealPlanRequestPackage.ProductDetails);
                     if (userDietPlanMealDetailProductMapEntityList != null)
                     {
                         userDietPlanMealDetailProductMapEntityList.ForEach(async userDietPlanMealDetailProductMapEntity =>
                         {
                             userDietPlanMealDetailProductMapEntity.UserDietPlanDetailId = userDietPlanDetailEntity.Id;
-                            await _userDietPlanMealDetailProductMapEntityRepository.Insert(userDietPlanMealDetailProductMapEntity);
+                            if (userDietPlanMealDetailProductMapEntity.Id<=0)
+                            {
+                                await _userDietPlanMealDetailProductMapEntityRepository.Insert(userDietPlanMealDetailProductMapEntity);
+                            }
+                            else
+                            {
+                                await _userDietPlanMealDetailProductMapEntityRepository.Update(userDietPlanMealDetailProductMapEntity);
+
+                            }
                         });
                         success = true;
                     }
                 }
             }
+
             return new GenericServiceResponsePackage { Success = success };
         }
 

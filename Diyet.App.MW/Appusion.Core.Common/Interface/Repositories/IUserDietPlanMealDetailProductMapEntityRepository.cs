@@ -9,6 +9,5 @@ namespace Appusion.Core.Common.Interface.Repositories
 {
     public interface IUserDietPlanMealDetailProductMapEntityRepository : IGenericRepository<UserDietPlanMealDetailProductMapEntity>
     {
-
     }
 }

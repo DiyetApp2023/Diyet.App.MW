@@ -8,6 +8,8 @@ namespace Appusion.Core.Common.RequestModels.DietPlan
 {
     public class UserDietPlanMealDetailProductMapRequestPackage
     {
+        public long Id { get; set; }
+
         public int ProductId { get; set; }
 
         public int UnitId { get; set; }
