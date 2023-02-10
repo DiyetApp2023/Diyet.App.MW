@@ -15,5 +15,11 @@ namespace Appusion.Core.Common.Entities.DietPlan
         public long PlanId { get; set; }
 
         public int MealId { get; set; }
+
+        public TimeSpan? StartTime { get; set; }
+
+        public TimeSpan? EndTime { get; set; }
+
+        public double? EstimatedCalorie { get; set; }
     }
 }

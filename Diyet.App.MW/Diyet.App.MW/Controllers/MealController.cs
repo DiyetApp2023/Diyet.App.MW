@@ -35,5 +35,17 @@ namespace Appusion.Core.Services.Api.Controllers
         {
             return await _mealService.GetMealList();
         }
+
+
+        /// <summary>
+        /// GetDefaultScheduledMealList
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/meal/getdefaultscheduledmeallist")]
+        [HttpGet]
+        public async Task<GenericServiceResult<List<GetDefaultScheduledMealListResponsePackage>>> GetDefaultScheduledMealList()
+        {
+            return await _mealService.GetDefaultScheduledMealList();
+        }
     }
 }

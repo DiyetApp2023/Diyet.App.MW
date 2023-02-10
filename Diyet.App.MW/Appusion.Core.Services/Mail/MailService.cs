@@ -54,7 +54,7 @@ namespace Appusion.Core.Services.Mail
             var smtp = new MailKit.Net.Smtp.SmtpClient();
             smtp.Connect(_mailHelper.MailSettings.Host, _mailHelper.MailSettings.Port, SecureSocketOptions.StartTls);
             smtp.Authenticate(_mailHelper.MailSettings.Mail, _mailHelper.MailSettings.Password);
-            smtp.SendAsync(email);
+            await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }
 

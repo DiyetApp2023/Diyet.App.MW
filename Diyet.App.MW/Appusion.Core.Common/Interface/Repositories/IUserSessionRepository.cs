@@ -1,5 +1,6 @@
 ﻿using Appusion.Core.Common.Entities.User;
 using Appusion.Core.Common.RequestModels.User;
+using Appusion.Core.Common.ResponseModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,8 @@ namespace Appusion.Core.Common.Interface.Repositories
     public interface IUserSessionRepository : IGenericRepository<UserSessionEntity>
     {
         Task<UserSessionEntity> GetUserSessionEntity(GetUserSessionEntityRequestPackage getUserSessionEntityRequestPackage);
+
+        Task<UserSessionInfoResponsePackage> GetUserSessionInfo(UserSessionInfoRequestPackage userSessionInfoRequestPackage);
+
     }
 }

@@ -27,5 +27,11 @@ namespace Appusion.Core.Services.Meal
            var meailEntityList =  await _mealEntityRepository.GetMealEntityList();
            return _mapper.Map<List<MealEntity>, List<GetMealListResponsePackage>>(meailEntityList);
         }
+
+        public async Task<List<GetDefaultScheduledMealListResponsePackage>> GetDefaultScheduledMealList()
+        {
+            var meailEntityList = await _mealEntityRepository.GetDefaultScheduledMealList();
+            return _mapper.Map<List<MealEntity>, List<GetDefaultScheduledMealListResponsePackage>>(meailEntityList);
+        }
     }
 }

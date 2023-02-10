@@ -15,5 +15,11 @@ namespace Appusion.Core.Common.ParameterModels.Jwt
         /// Secret
         /// </summary>
         public string Secret { get; set; }
+
+        public int AccessTokenExpiration { get; set; }
+
+        public int RefreshTokenExpiration { get; set; }
+
+        public string Issuer { get; set; }
     }
 }

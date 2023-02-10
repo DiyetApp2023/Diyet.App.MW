@@ -1,4 +1,5 @@
 ﻿using Appusion.Core.Common.Entities.User;
+using Appusion.Core.Common.ResponseModels.Jwt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,12 @@ namespace Appusion.Core.Common.Interface.Services
 {
     public interface IJwtUtils
     {
-        public string GenerateToken(UserEntity userEntity);
-        public int? ValidateToken(string token);
+        Task<TokenResponsePackage> GenerateAccessToken(UserEntity userEntity);
+
+        Task<TokenResponsePackage> GenerateToken(UserEntity userEntity);
+
+        Task<TokenResponsePackage> GenerateRefreshToken();
+
+        Task<int?> ValidateAccessToken(string token);
     }
 }

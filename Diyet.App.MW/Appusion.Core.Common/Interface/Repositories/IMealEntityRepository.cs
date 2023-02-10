@@ -9,6 +9,7 @@ namespace Appusion.Core.Common.Interface.Repositories
 {
     public interface IMealEntityRepository : IGenericRepository<MealEntity>
     {
+        Task<List<MealEntity>> GetDefaultScheduledMealList();
         Task<List<MealEntity>> GetMealEntityList();
     }
 }

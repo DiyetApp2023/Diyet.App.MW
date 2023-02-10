@@ -34,7 +34,7 @@ namespace Appusion.Core.Common.Implementation.Repositories
 
         public async Task SaveUserEntity(UserEntity userEntity)
         {
-            Insert(userEntity);
+            await Insert(userEntity);
         }
     }
 

@@ -25,9 +25,9 @@ namespace Appusion.Core.Common.Implementation.Repositories
             return DbContext.Set<TEntity>().AsQueryable().Where(filter);
         }
 
-        public TEntity GetById(int id)
+        public async Task<TEntity> GetById(int id)
         {
-            return DbContext.Find<TEntity>(id);
+            return await DbContext.FindAsync<TEntity>(id);
         }
 
         public ICollection<TEntity> GetList(Expression<Func<TEntity, bool>> filter)
@@ -35,16 +35,16 @@ namespace Appusion.Core.Common.Implementation.Repositories
             return DbContext.Set<TEntity>().Where(filter).ToList();
         }
 
-        public void Insert(TEntity entity)
+        public async Task Insert(TEntity entity)
         {
-            DbContext.Set<TEntity>().Add(entity);
-            DbContext.SaveChanges();
+            await DbContext.Set<TEntity>().AddAsync(entity);
+            await DbContext.SaveChangesAsync();
         }
 
-        public void Insert(IEnumerable<TEntity> entities)
+        public async Task Insert(IEnumerable<TEntity> entities)
         {
-            DbContext.Set<TEntity>().AddRange(entities);
-            DbContext.SaveChanges();
+            await DbContext.Set<TEntity>().AddRangeAsync(entities);
+            await DbContext.SaveChangesAsync();
         }
 
         public IQueryable<TEntity> Query()
@@ -52,24 +52,25 @@ namespace Appusion.Core.Common.Implementation.Repositories
             return DbContext.Set<TEntity>().AsQueryable();
         }
 
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             DbContext.Entry(entity).State = EntityState.Modified;
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
         }
 
-        public void Update(IEnumerable<TEntity> entities)
+        public async Task Update(IEnumerable<TEntity> entities)
         {
             foreach (var entity in entities)
             {
                 DbContext.Entry(entity).State = EntityState.Modified;
             }
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
         }
 
-        public void Delete(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             DbContext.Set<TEntity>().Remove(entity);
+            await DbContext.SaveChangesAsync();
         }
     }
 }

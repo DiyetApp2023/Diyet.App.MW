@@ -20,12 +20,12 @@ namespace Appusion.Core.Common.Implementation.Repositories
 
         public async Task<List<ProductEntity>> GetAllProductList()
         {
-            return DbContext.Product.ToList();
+            return  DbContext.Product.ToList();
         }
 
         public async Task<List<ProductEntity>> GetSearchedProductList(string searchedProduct)
         {
-            return DbContext.Product.Where(p=>p.ProductName.StartsWith(searchedProduct)).ToList();
+            return  DbContext.Product.Where(p=>p.ProductName.StartsWith(searchedProduct)).ToList();
         }
 
         public async Task<List<ProductUnitEntity>> GetSelectedProductUnitList(int productId)

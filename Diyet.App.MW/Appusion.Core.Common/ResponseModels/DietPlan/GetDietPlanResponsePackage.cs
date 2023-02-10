@@ -8,6 +8,8 @@ namespace Appusion.Core.Common.ResponseModels.DietPlan
 {
     public class GetDietPlanResponsePackage
     {
+        public long Id { get; set; }
+
         public string PlanName { get; set; }
 
         public DateTime StartDate { get; set; }

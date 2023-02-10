@@ -7,21 +7,21 @@ namespace Appusion.Core.Common.Interface.Repositories
     {
         IQueryable<T> Query();
 
-        T GetById(int id);
+        Task<T> GetById(int id);
 
         ICollection<T> GetList(Expression<Func<T, bool>> filter);
 
         IQueryable<T> Get(Expression<Func<T, bool>> filter);
 
-        void Insert(T entity);
+        Task Insert(T entity);
 
-        void Insert(IEnumerable<T> entities);
+        Task Insert(IEnumerable<T> entities);
 
-        void Update(T entity);
+        Task Update(T entity);
 
-        void Update(IEnumerable<T> entities);
+        Task Update(IEnumerable<T> entities);
 
-        void Delete(T entity);
+        Task Delete(T entity);
 
         IQueryable<T> Table { get; }
     }

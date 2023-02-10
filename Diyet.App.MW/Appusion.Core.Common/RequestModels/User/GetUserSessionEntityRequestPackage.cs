@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Appusion.Core.Common.RequestModels.User
 {
-    public class GetUserSessionEntityRequestPackage
+    public class GetUserSessionEntityRequestPackage : UserSessionInfoRequestPackage
     {
-        public long UserId { get; set; }
-
-        public string JwtToken { get; set; }
+        public string AccessToken { get; set; }
     }
 }

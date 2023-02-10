@@ -4,6 +4,7 @@ using Appusion.Core.Common.Implementation.DbContexts;
 using Appusion.Core.Common.Implementation.Repositories;
 using Appusion.Core.Common.Interface.Repositories;
 using Appusion.Core.Common.Interface.Services;
+using Appusion.Core.Common.RequestModels.Jwt;
 using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels;
 using Appusion.Core.Common.ResponseModels.General;
@@ -77,6 +78,14 @@ namespace Appusion.Core.Services.User
             return await this.RunSafelyAsync(() =>
             {
                 return _userComponent.ChangePassword(userChangePasswordRequestPackage).Result;
+            });
+        }
+
+        public async Task<GenericServiceResult<UserAuthenticateResponsePackage>> Refresh(RefreshRequestPackage refreshRequestPackage)
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _userComponent.Refresh(refreshRequestPackage).Result;
             });
         }
     }

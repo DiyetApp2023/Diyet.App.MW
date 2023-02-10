@@ -17,7 +17,7 @@ namespace Appusion.Core.Common.Implementation.Repositories
 
         public async Task SaveUserActivation(UserActivationEntity userActivation)
         {
-           Insert(userActivation);
+           await Insert(userActivation);
         }
     }
 }

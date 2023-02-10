@@ -2,6 +2,7 @@
 using Appusion.Core.Common.Entities.User;
 using Appusion.Core.Common.RequestModels.DietPlan;
 using Appusion.Core.Common.RequestModels.User;
+using Appusion.Core.Common.ResponseModels.DietPlan;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace Appusion.Core.Common.Interface.Repositories
         Task<DietPlanEntity> GetActiveDietPlanEntity(long userId);
 
         Task<List<DietPlanEntity>> GetAllDietPlanEntityList();
+
+        Task<GetUserDietMealPlanResponsePackage> GetActiveUserDietMealPlan(long userId);
     }
 }

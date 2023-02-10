@@ -1,6 +1,7 @@
 ﻿using Appusion.Core.BaseModels;
 using Appusion.Core.Common.Entities.User;
 using Appusion.Core.Common.Interface.Services;
+using Appusion.Core.Common.RequestModels.Jwt;
 using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels.General;
 using Appusion.Core.Common.ResponseModels.User;
@@ -98,6 +99,18 @@ namespace Appusion.Core.Services.Api.Controllers
         public async Task<GenericServiceResult<GenericServiceResponsePackage>> ChangePassword([FromBody] UserChangePasswordRequestPackage userChangePasswordRequestPackage)
         {
             return await _userService.ChangePassword(userChangePasswordRequestPackage);
+        }
+
+        /// <summary>
+        /// Refresh
+        /// </summary>
+        /// <param name="refreshRequestPackage"></param>
+        /// <returns></returns>
+        [Route("api/user/refresh")]
+        [HttpPost]
+        public async Task<GenericServiceResult<UserAuthenticateResponsePackage>> Refresh([FromBody] RefreshRequestPackage refreshRequestPackage)
+        {
+            return await _userService.Refresh(refreshRequestPackage);
         }
     }
 }

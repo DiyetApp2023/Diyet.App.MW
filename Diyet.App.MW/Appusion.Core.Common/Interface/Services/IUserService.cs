@@ -1,5 +1,6 @@
 ﻿using Appusion.Core.BaseModels;
 using Appusion.Core.Common.Entities.User;
+using Appusion.Core.Common.RequestModels.Jwt;
 using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels.General;
 using Appusion.Core.Common.ResponseModels.User;
@@ -22,5 +23,6 @@ namespace Appusion.Core.Common.Interface.Services
         Task<GenericServiceResult<GenericServiceResponsePackage>> ActivateUser(UserActivationRequestPackage userActivationRequestPackage);
         Task<GenericServiceResult<GenericServiceResponsePackage>> ForgotPassword(UserForgotPasswordRequestPackage userForgotPasswordRequestPackage);
         Task<GenericServiceResult<GenericServiceResponsePackage>> ChangePassword(UserChangePasswordRequestPackage userChangePasswordRequestPackage);
+        Task<GenericServiceResult<UserAuthenticateResponsePackage>> Refresh(RefreshRequestPackage refreshRequestPackage);
     }
 }

@@ -67,6 +67,8 @@ builder.Services.AddScoped<IUserActivationEntityRepository, UserActivationEntity
 builder.Services.AddScoped<IMealEntityRepository, MealEntityRepository>();
 builder.Services.AddScoped<IUserDietPlanDetailRepository,UserDietPlanDetailRepository>();
 builder.Services.AddScoped<IUserDietPlanMealDetailProductMapEntityRepository, UserDietPlanMealDetailProductMapEntityRepository>();
+builder.Services.AddScoped<IUserDailyActivityEntityRepository, UserDailyActivityEntityRepository>();
+builder.Services.AddScoped<IUserSessionDetailEntityRepository, UserSessionDetailEntityRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<RestHelper>();
 builder.Services.AddScoped<RestClient>();
@@ -84,10 +86,17 @@ builder.Services.AddScoped<DietPlanComponent>();
 //    return (CurrentUser)httpContext.Items["User"];
 //});
 
-builder.Services.AddScoped<CurrentUser>((serviceProvider) =>
+//builder.Services.AddScoped<CurrentUser>(async (serviceProvider) =>
+//{
+//    var currentUser =  new CurrentUser();
+//    return await currentUser.Create(serviceProvider);
+//});
+
+builder.Services.AddScoped((serviceProvider) =>
 {
     return CurrentUser.Create(serviceProvider);
 });
+
 
 
 builder.Services.AddCors(options =>

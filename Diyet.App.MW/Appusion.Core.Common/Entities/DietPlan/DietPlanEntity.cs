@@ -25,5 +25,7 @@ namespace Appusion.Core.Common.Entities.DietPlan
         public string? Description { get; set; }
 
         public bool IsActive { get; set; } = true;
+
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
     }
 }

@@ -18,6 +18,10 @@ namespace Appusion.Core.Common.Entities.Meal
 
         public string MealName { get; set; }
 
+        public TimeSpan? StartTime { get; set; }
+
+        public TimeSpan? EndTime { get; set; }
+
         public bool IsActive { get; set; }
     }
 }

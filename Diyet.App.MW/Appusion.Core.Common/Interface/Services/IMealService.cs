@@ -12,6 +12,7 @@ namespace Appusion.Core.Common.Interface.Services
 {
     public interface IMealService
     {
+        Task<GenericServiceResult<List<GetDefaultScheduledMealListResponsePackage>>> GetDefaultScheduledMealList();
         Task<GenericServiceResult<List<GetMealListResponsePackage>>> GetMealList();
     }
 }

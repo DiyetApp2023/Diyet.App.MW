@@ -19,7 +19,9 @@ namespace Appusion.Core.Common.Entities.User
 
         public long UserId { get; set; }
 
-        public string JwtToken { get; set; }
+        public string AccessToken { get; set; }
+
+        public DateTime AccessTokenExpiration { get; set; }
 
         public DateTime LogOnDate { get; set; } = DateTime.UtcNow;
     }

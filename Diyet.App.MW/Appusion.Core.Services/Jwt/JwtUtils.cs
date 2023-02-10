@@ -1,5 +1,6 @@
 ﻿using Appusion.Core.Common.Entities.User;
 using Appusion.Core.Common.Interface.Services;
+using Appusion.Core.Common.ResponseModels.Jwt;
 using Appusion.Core.Common.Utility;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,21 +24,57 @@ namespace Appusion.Core.Services.Jwt
             _jwtHelper = jwtHelper;
         }
 
-        public string GenerateToken(UserEntity userEntity)
+        public async Task<TokenResponsePackage> GenerateAccessToken(UserEntity userEntity)
         {
+            var accessTokenExpiration = DateTime.UtcNow.AddMinutes(_jwtHelper.GetJwtParameter.AccessTokenExpiration);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtHelper.GetJwtParameter.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", userEntity.Id.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = accessTokenExpiration,
+                Issuer = _jwtHelper.GetJwtParameter.Issuer,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var accessToken = tokenHandler.WriteToken(token);
+            return new TokenResponsePackage
+            {
+                AccessToken = accessToken,
+                AccessTokenExpiration = accessTokenExpiration
+            };
         }
 
-        public int? ValidateToken(string token)
+        public async Task<TokenResponsePackage> GenerateRefreshToken()
+        {
+            var numberByte = new Byte[32];
+            using var rnd = RandomNumberGenerator.Create();
+            rnd.GetBytes(numberByte);
+            var refreshToken = Convert.ToBase64String(numberByte);
+            var refreshTokenExpiration = DateTime.UtcNow.AddDays(_jwtHelper.GetJwtParameter.RefreshTokenExpiration);
+
+            return new TokenResponsePackage
+            {
+                RefreshToken = refreshToken,
+                RefreshTokenExpiration = refreshTokenExpiration
+            };
+        }
+
+        public async Task<TokenResponsePackage> GenerateToken(UserEntity userEntity)
+        {
+            var accessTokenInfo = await GenerateAccessToken(userEntity);
+            var refreshTokenInfo = await GenerateRefreshToken();
+            return new TokenResponsePackage
+            {
+                AccessToken = accessTokenInfo.AccessToken,
+                AccessTokenExpiration = accessTokenInfo.AccessTokenExpiration,
+                RefreshToken = refreshTokenInfo.RefreshToken,
+                RefreshTokenExpiration = refreshTokenInfo.RefreshTokenExpiration
+            };
+        }
+
+
+        public async Task<int?> ValidateAccessToken(string token)
         {
             if (token == null)
             {

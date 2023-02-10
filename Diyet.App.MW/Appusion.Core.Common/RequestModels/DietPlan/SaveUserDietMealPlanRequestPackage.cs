@@ -7,6 +7,12 @@ namespace Appusion.Core.Common.RequestModels.DietPlan
 
 		public int  MealId { get; set; }
 
+		public TimeSpan? StartTime { get; set; } 
+
+        public TimeSpan? EndTime { get; set; }
+
+		public double? EstimatedCalorie { get; set; }
+
 		public List<UserDietPlanMealDetailProductMapRequestPackage> ProductDetails { get; set; }
 
 		public SaveUserDietMealPlanRequestPackage()

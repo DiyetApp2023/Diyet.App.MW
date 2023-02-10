@@ -4,14 +4,17 @@ using Appusion.Core.Common.Interface.Repositories;
 using Appusion.Core.Common.Interface.Services;
 using Appusion.Core.Common.ParameterModels.Email;
 using Appusion.Core.Common.ParameterModels.User;
+using Appusion.Core.Common.RequestModels.Jwt;
 using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels;
 using Appusion.Core.Common.ResponseModels.General;
+using Appusion.Core.Common.ResponseModels.Jwt;
 using Appusion.Core.Common.ResponseModels.User;
 using Appusion.Core.Common.Utility;
 using Appusion.Core.ExceptionBase;
 using Appusion.Core.Services.Base;
 using AutoMapper;
+using Azure;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -31,6 +34,7 @@ namespace Appusion.Core.Services.User
         private readonly IOptions<UserParameter> _userParameters;
         private readonly IUserOtpEntityRepository _userOtpRepository;
         private readonly IUserSessionRepository _userSessionRepository;
+        private readonly IUserSessionDetailEntityRepository _userSessionDetailEntityRepository;
         public UserComponent(IJwtUtils jwtUtils,
             IMapper mapper,
             IUserEntityRepository userEntityRepository,
@@ -38,7 +42,8 @@ namespace Appusion.Core.Services.User
             IUserActivationEntityRepository userActivationRepository,
             IOptions<UserParameter> userParameters,
             IUserOtpEntityRepository userOtpRepository,
-            IUserSessionRepository userSessionRepository
+            IUserSessionRepository userSessionRepository,
+            IUserSessionDetailEntityRepository userSessionDetailEntityRepository
             )
         {
             _jwtUtils = jwtUtils;
@@ -49,6 +54,7 @@ namespace Appusion.Core.Services.User
             _userParameters = userParameters;
             _userOtpRepository = userOtpRepository;
             _userSessionRepository = userSessionRepository;
+            _userSessionDetailEntityRepository = userSessionDetailEntityRepository;
         }
 
         public async Task<UserAuthenticateResponsePackage> Authenticate(UserAuthenticateRequestPackage authenticateRequest)
@@ -59,10 +65,48 @@ namespace Appusion.Core.Services.User
                 throw new ApiException("Username or password is incorrect");
             }
             var response = _mapper.Map<UserAuthenticateResponsePackage>(userEntity);
-            response.Token = _jwtUtils.GenerateToken(userEntity);
-            _userSessionRepository.Insert(new UserSessionEntity { JwtToken=response.Token,UserId=userEntity.Id});
+            response.TokenInfo = await _jwtUtils.GenerateToken(userEntity);
+            var userSessionInfo= await _userSessionRepository.GetUserSessionInfo(new UserSessionInfoRequestPackage { UserId = userEntity.Id });
+            userSessionInfo.UserSessionEntity.AccessToken = response.TokenInfo.AccessToken;
+            userSessionInfo.UserSessionEntity.AccessTokenExpiration = response.TokenInfo.AccessTokenExpiration;
+            userSessionInfo.UserSessionEntity.LogOnDate = DateTime.UtcNow;
+            await _userSessionRepository.Update(userSessionInfo.UserSessionEntity);
+            userSessionInfo.UserSessionDetailEntity.RefreshToken = response.TokenInfo.RefreshToken;
+            userSessionInfo.UserSessionDetailEntity.RefreshTokenExpiration = response.TokenInfo.RefreshTokenExpiration;
+            await _userSessionDetailEntityRepository.Update(userSessionInfo.UserSessionDetailEntity);
             return response;
         }
+
+        public async Task<UserAuthenticateResponsePackage> Refresh(RefreshRequestPackage refreshRequestPackage)
+        {
+            var userSessionEntity = await _userSessionRepository.GetUserSessionEntity(new GetUserSessionEntityRequestPackage { AccessToken = refreshRequestPackage.AccessToken });
+            var userSessionDetailEntity = await _userSessionDetailEntityRepository.GetUserSessionDetailEntity(refreshRequestPackage);
+            if (userSessionEntity == null || userSessionDetailEntity == null )
+            {
+                throw new ApiException("Oturum bilgisi alınamamıştır. Lütfen uygulamaya yeniden giriş yapınız.");
+            }
+            if (userSessionDetailEntity == null || (userSessionDetailEntity != null && userSessionDetailEntity.RefreshTokenExpiration<=DateTime.UtcNow))
+            {
+                throw new ApiException("Refresh Token süresi dolmuştur. Lütfen uygulamaya yeniden giriş yapınız.");
+            }
+            var tokenInfo = await _jwtUtils.GenerateAccessToken(new UserEntity { Id= userSessionEntity.UserId});
+            userSessionEntity.AccessToken = tokenInfo.AccessToken;
+            userSessionEntity.AccessTokenExpiration= tokenInfo.AccessTokenExpiration;
+            userSessionEntity.LogOnDate = DateTime.UtcNow;
+            await _userSessionRepository.Update(userSessionEntity);
+            var userEntity = await _userEntityRepository.GetUserEntityById(userSessionEntity.UserId);
+            tokenInfo.RefreshToken = userSessionDetailEntity.RefreshToken;
+            tokenInfo.RefreshTokenExpiration = userSessionDetailEntity.RefreshTokenExpiration;
+            return new UserAuthenticateResponsePackage
+            {
+                EmailAddress = userEntity.EmailAddress,
+                FirstName = userEntity.FirstName,
+                LastName = userEntity.LastName,
+                Id = userEntity.Id,
+                TokenInfo = tokenInfo
+            };
+        }
+
 
         public async Task<UserAuthenticateResponsePackage> Register(UserRegisterRequestPackage userRegisterRequestPackage)
         {
@@ -76,8 +120,20 @@ namespace Appusion.Core.Services.User
             userEntity.FullName = userRegisterRequestPackage.FirstName + " " + userRegisterRequestPackage.LastName;
             await _userEntityRepository.SaveUserEntity(userEntity);
             var response = _mapper.Map<UserAuthenticateResponsePackage>(userEntity);
-            response.Token = _jwtUtils.GenerateToken(userEntity);
-            _userSessionRepository.Insert(new UserSessionEntity { JwtToken = response.Token, UserId = userEntity.Id });
+            response.TokenInfo = await _jwtUtils.GenerateToken(userEntity);
+            var userSessionEntity = new UserSessionEntity
+            {
+                UserId = userEntity.Id,
+                AccessToken = response.TokenInfo.AccessToken,
+                AccessTokenExpiration = response.TokenInfo.AccessTokenExpiration
+            };
+            await _userSessionRepository.Insert(userSessionEntity);
+            await _userSessionDetailEntityRepository.Insert(new UserSessionDetailEntity
+            {
+                UserSessionId = userSessionEntity.Id,
+                RefreshToken = response.TokenInfo.RefreshToken,
+                RefreshTokenExpiration = response.TokenInfo.RefreshTokenExpiration
+            });
             return response;
         }
 
@@ -97,7 +153,7 @@ namespace Appusion.Core.Services.User
                 ToEmail = sendOtpRequestPackage.EmailAddress,
                 ToName = userEntity.FullName
             };
-            _userOtpRepository.Insert(new UserOtpEntity { OtpCode = otpCode, UserId = userEntity.Id });
+            await _userOtpRepository.Insert(new UserOtpEntity { OtpCode = otpCode, UserId = userEntity.Id });
             await _mailService.SendEmailByNetSmtp(mailRequest);
             return new GenericServiceResponsePackage { Success = true };
         }
@@ -122,8 +178,8 @@ namespace Appusion.Core.Services.User
             {
                 userEntity.EmailAddressConfirmed = true;
                 userOtpEntity.ExpirationDate = DateTime.UtcNow;
-                _userEntityRepository.Update(userEntity);
-                _userOtpRepository.Update(userOtpEntity);
+                await _userEntityRepository.Update(userEntity);
+                await _userOtpRepository.Update(userOtpEntity);
                 success = true;
             }
             return new GenericServiceResponsePackage { Success = success };
@@ -136,7 +192,7 @@ namespace Appusion.Core.Services.User
             if (userEntity != null)
             {
                 userEntity.EmailAddressConfirmed = true;
-                _userEntityRepository.Update(userEntity);
+                await _userEntityRepository.Update(userEntity);
                 success = true;
             }
             return new GenericServiceResponsePackage { Success = success };
@@ -162,7 +218,7 @@ namespace Appusion.Core.Services.User
                 ToEmail = userForgotPasswordRequestPackage.EmailAddress,
                 ToName = userEntity.FullName
             };
-            _userOtpRepository.Insert(new UserOtpEntity { OtpCode = otpCode, UserId = userEntity.Id });
+            await _userOtpRepository.Insert(new UserOtpEntity { OtpCode = otpCode, UserId = userEntity.Id });
             await _mailService.SendEmailByNetSmtp(mailRequest);
             return new GenericServiceResponsePackage { Success = true };
         }
@@ -176,7 +232,7 @@ namespace Appusion.Core.Services.User
             {
                 var userEntity = await _userEntityRepository.GetUserEntityById(userOtpEntity.UserId);
                 userEntity.HashedPassword = BCrypt.Net.BCrypt.HashPassword(userChangePasswordRequestPackage.Password);
-                _userEntityRepository.Update(userEntity);
+                await _userEntityRepository.Update(userEntity);
                 success= true;
             }
             return new GenericServiceResponsePackage { Success = success };

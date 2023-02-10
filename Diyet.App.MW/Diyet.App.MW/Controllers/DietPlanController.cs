@@ -8,6 +8,7 @@ using Appusion.Core.Common.ResponseModels.DietPlan;
 using Appusion.Core.Common.ResponseModels.General;
 using Appusion.Core.Common.ResponseModels.Meal;
 using Appusion.Core.Common.ResponseModels.Product;
+using Appusion.Core.Common.ResponseModels.User;
 using Appusion.Core.Services.User;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,7 @@ namespace Appusion.Core.Services.Api.Controllers
         /// <returns></returns>
         [Route("api/dietplan/savedietplan")]
         [HttpPost]
-        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveDietPlan([FromBody] SaveDietPlanRequestPackage saveDietPlanRequestPackage)
+        public async Task<GenericServiceResult<SaveDietPlanResponsePackage>> SaveDietPlan([FromBody] SaveDietPlanRequestPackage saveDietPlanRequestPackage)
         {
             return await _dietPlanService.SaveDietPlan(saveDietPlanRequestPackage);
         }
@@ -66,6 +67,41 @@ namespace Appusion.Core.Services.Api.Controllers
         public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDietMealPlan([FromBody]SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage)
         {
             return await _dietPlanService.SaveUserDietMealPlan(saveUserDietMealPlanRequestPackage);
+        }
+
+        /// <summary>
+        /// GetDietPlan
+        /// </summary>
+        /// <param name="genericUserRequestPackage"></param>
+        /// <returns></returns>
+        [Route("api/dietplan/getuserdietmealplan")]
+        [HttpGet]
+        public async Task<GenericServiceResult<GetUserDietMealPlanResponsePackage>> GetUserDietMealPlan()
+        {
+            return await _dietPlanService.GetUserDietMealPlan();
+        }
+
+        /// <summary>
+        /// SaveUserDailyActivity
+        /// </summary>
+        /// <param name="saveUserDailyActivityRequestPackage"></param>
+        /// <returns></returns>
+        [Route("api/dietplan/saveuserdailyactivity")]
+        [HttpPost]
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDailyActivity([FromBody] SaveUserDailyActivityRequestPackage saveUserDailyActivityRequestPackage)
+        {
+            return await _dietPlanService.SaveUserDailyActivity(saveUserDailyActivityRequestPackage);
+        }
+
+        /// <summary>
+        /// GetUserDailyActivityList
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/dietplan/getuserdailyactivitylist")]
+        [HttpGet]
+        public async Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList()
+        {
+            return await _dietPlanService.GetUserDailyActivityList();
         }
     }
 }

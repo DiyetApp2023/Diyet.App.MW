@@ -20,6 +20,15 @@ namespace Appusion.Core.Services.Meal
         {
             _mealComponent = mealComponent;
         }
+
+        public async Task<GenericServiceResult<List<GetDefaultScheduledMealListResponsePackage>>> GetDefaultScheduledMealList()
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _mealComponent.GetDefaultScheduledMealList().Result;
+            });
+        }
+
         public async Task<GenericServiceResult<List<GetMealListResponsePackage>>> GetMealList()
         {
             return await this.RunSafelyAsync(() =>

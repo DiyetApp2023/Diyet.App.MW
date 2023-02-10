@@ -29,7 +29,8 @@ namespace Appusion.Core.Common.Middlewares.Jwt
                     string.Equals(httpRequest.Path.Value, "/api/user/activateuser", StringComparison.OrdinalIgnoreCase) ||
                      string.Equals(httpRequest.Path.Value, "/api/user/authenticate", StringComparison.OrdinalIgnoreCase) ||
                       string.Equals(httpRequest.Path.Value, "/api/user/forgotpassword", StringComparison.OrdinalIgnoreCase) ||
-                      string.Equals(httpRequest.Path.Value, "/api/user/changepassword", StringComparison.OrdinalIgnoreCase) 
+                      string.Equals(httpRequest.Path.Value, "/api/user/changepassword", StringComparison.OrdinalIgnoreCase) ||
+                       string.Equals(httpRequest.Path.Value, "/api/user/refresh", StringComparison.OrdinalIgnoreCase)
                     )
                 {
                     await _nextMiddleware.Invoke(httpContext);
@@ -44,22 +45,22 @@ namespace Appusion.Core.Common.Middlewares.Jwt
             }
             try
             {
-                var jwtToken = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+                var accessToken = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
                 
-                if (string.IsNullOrEmpty(jwtToken))
+                if (string.IsNullOrEmpty(accessToken))
                 {
                     await httpContext.Response.WriteAsync("Jwt içeriği gönderilmedi.");
                     return;
                 }
                 var jwtUtils = httpContext.RequestServices.GetRequiredService<IJwtUtils>();
-                var userId = jwtUtils.ValidateToken(jwtToken);
+                var userId = await jwtUtils.ValidateAccessToken(accessToken);
                 if (userId != null)
                 {
                     var userSessionRepository = httpContext.RequestServices.GetRequiredService<IUserSessionRepository>();
                     var userSession = await userSessionRepository.GetUserSessionEntity(new RequestModels.User.GetUserSessionEntityRequestPackage
                     {
                         UserId = Convert.ToInt64(userId),
-                        JwtToken = jwtToken
+                        AccessToken = accessToken
                     });
                     if (userSession == null)
                     {
@@ -71,6 +72,11 @@ namespace Appusion.Core.Common.Middlewares.Jwt
                         httpContext.Items["UserId"] = Convert.ToInt64(userId);
                         await _nextMiddleware.Invoke(httpContext);
                     }
+                }
+                else
+                {
+                    httpContext.Response.StatusCode = 401;
+                    await httpContext.Response.WriteAsync("Oturum doğrulanamamıştır.");
                 }
             }
             catch (Exception exception)

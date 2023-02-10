@@ -5,6 +5,7 @@ using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels.DietPlan;
 using Appusion.Core.Common.ResponseModels.General;
 using Appusion.Core.Common.ResponseModels.Meal;
+using Appusion.Core.Common.ResponseModels.User;
 using Appusion.Core.Services.Base;
 using Appusion.Core.Services.Meal;
 using System;
@@ -29,7 +30,7 @@ namespace Appusion.Core.Services.DietPlan
         /// </summary>
         /// <param name="saveDietPlanRequestPackage"></param>
         /// <returns></returns>
-        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveDietPlan(SaveDietPlanRequestPackage saveDietPlanRequestPackage)
+        public async Task<GenericServiceResult<SaveDietPlanResponsePackage>> SaveDietPlan(SaveDietPlanRequestPackage saveDietPlanRequestPackage)
         {
             return await this.RunSafelyAsync(() =>
             {
@@ -55,6 +56,30 @@ namespace Appusion.Core.Services.DietPlan
             return await this.RunSafelyAsync(() =>
             {
                 return _dietPlanComponent.SaveUserDietMealPlan(saveUserDietMealPlanRequestPackage).Result;
+            });
+        }
+
+        public async Task<GenericServiceResult<GetUserDietMealPlanResponsePackage>> GetUserDietMealPlan()
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _dietPlanComponent.GetUserDietMealPlan().Result;
+            });
+        }
+
+        public async Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDailyActivity(SaveUserDailyActivityRequestPackage saveUserDailyActivityRequestPackage)
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _dietPlanComponent.SaveUserDailyActivity(saveUserDailyActivityRequestPackage).Result;
+            });
+        }
+
+        public async Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList()
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _dietPlanComponent.GetUserDailyActivityList().Result;
             });
         }
     }

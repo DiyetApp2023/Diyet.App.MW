@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Appusion.Core.ExceptionBase;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Appusion.Core.Common.Implementation.DbContexts
@@ -7,19 +8,12 @@ namespace Appusion.Core.Common.Implementation.DbContexts
     {
         public AppusionDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
 
-        public override int SaveChanges()
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
-            var result = 0;
             try
             {
-                result = base.SaveChanges();
+               return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
             }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw;
-
-            }
-
             catch (Exception ex)
             {
                 List<EntityEntry> changedEntries = ChangeTracker.Entries().Where(x => x.State != EntityState.Unchanged).ToList();
@@ -39,10 +33,8 @@ namespace Appusion.Core.Common.Implementation.DbContexts
                             break;
                     }
                 }
-                throw ex;
-
+                throw new ApiException(ex.Message,"Uygulamada hata oluştu.",System.Net.HttpStatusCode.InternalServerError);
             }
-            return result;
         }
     }
 }
