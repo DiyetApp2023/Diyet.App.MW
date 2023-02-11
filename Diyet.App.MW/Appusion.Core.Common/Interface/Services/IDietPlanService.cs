@@ -14,7 +14,7 @@ namespace Appusion.Core.Common.Interface.Services
         Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDietMealPlan(SaveUserDietMealPlanRequestPackage saveUserDietMealPlanRequestPackage);
         Task<GenericServiceResult<GetUserDietMealPlanResponsePackage>> GetUserDietMealPlan();
         Task<GenericServiceResult<GenericServiceResponsePackage>> SaveUserDailyActivity(SaveUserDailyActivityRequestPackage saveUserDailyActivityRequestPackage);
-        Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList();
+        Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList(DateTime activityDate);
 
     }
 }

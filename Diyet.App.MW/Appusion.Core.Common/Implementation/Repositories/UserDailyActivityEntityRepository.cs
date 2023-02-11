@@ -25,11 +25,11 @@ namespace Appusion.Core.Common.Implementation.Repositories
             return userDailyActivityEntity;
         }
 
-        public async Task<List<GetUserDailyActivityResponsePackage>> GetUserDailyActivityList(long userId)
+        public async Task<List<GetUserDailyActivityResponsePackage>> GetUserDailyActivityList(long userId, DateTime activityDate)
         {
             var userDailyActivityList = (from userDailyActivity in DbContext.UserDailyActivity
                      join activity in DbContext.Activity on (int)userDailyActivity.ActivityType equals activity.Id
-                     where (userDailyActivity.UserId == userId && userDailyActivity.CreateDate == DateTime.UtcNow.Date)
+                     where (userDailyActivity.UserId == userId && userDailyActivity.CreateDate == activityDate.Date)
                      select new GetUserDailyActivityResponsePackage
                      {
                          ActivityName = activity.Name,

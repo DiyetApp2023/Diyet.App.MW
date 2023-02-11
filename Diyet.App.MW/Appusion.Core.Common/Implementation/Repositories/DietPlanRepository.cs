@@ -31,7 +31,7 @@ namespace Appusion.Core.Common.Implementation.Repositories
             return dietPlanEntity;
         }
 
-        public Task<GetUserDietMealPlanResponsePackage> GetActiveUserDietMealPlan(long userId)
+        public async Task<GetUserDietMealPlanResponsePackage> GetActiveUserDietMealPlan(long userId)
         {
             var userDietMealPlanResponsePackage = (from dietPlan in DbContext.DietPlan
                             join userDietPlanMap in DbContext.UserDietPlanMap on dietPlan.Id equals userDietPlanMap.PlanId

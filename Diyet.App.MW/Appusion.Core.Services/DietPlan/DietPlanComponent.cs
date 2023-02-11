@@ -45,26 +45,30 @@ namespace Appusion.Core.Services.DietPlan
 
         public async Task<SaveDietPlanResponsePackage> SaveDietPlan(SaveDietPlanRequestPackage saveDietPlanRequestPackage)
         {
-            var success = false;
-            var dietPlanEntity = _mapper.Map<SaveDietPlanRequestPackage, DietPlanEntity>(saveDietPlanRequestPackage);
-            // todo burada transaction başlatılmalı.
-            if (dietPlanEntity != null)
+            long planId = 0;
+            if (saveDietPlanRequestPackage != null)
             {
-               await _dietPlanRepository.Insert(dietPlanEntity);
+                var dietPlanEntity = _mapper.Map<SaveDietPlanRequestPackage, DietPlanEntity>(saveDietPlanRequestPackage);
+                // todo burada transaction başlatılmalı.
                 if (dietPlanEntity != null)
                 {
-                    if (dietPlanEntity.Id > 0)
+                    if (dietPlanEntity.Id <= 0)
                     {
+                        await _dietPlanRepository.Insert(dietPlanEntity);
                         await _userDietPlanMapRepository.Insert(new UserDietPlanMapEntity
                         {
                             PlanId = dietPlanEntity.Id,
                             UserId = _currentUser.Id
                         });
-                        success = true;
                     }
+                    else
+                    {
+                        await _dietPlanRepository.Update(dietPlanEntity);
+                    }
+                    planId = dietPlanEntity.Id;
                 }
             }
-            return new SaveDietPlanResponsePackage { PlanId= dietPlanEntity.Id };
+            return new SaveDietPlanResponsePackage { PlanId = planId };
         }
 
         public async Task<GetDietPlanResponsePackage> GetDietPlan()
@@ -159,13 +163,18 @@ namespace Appusion.Core.Services.DietPlan
             return new GenericServiceResponsePackage { Success = success };
         }
 
-        public async Task<List<GetUserDailyActivityResponsePackage>> GetUserDailyActivityList()
+        public async Task<List<GetUserDailyActivityResponsePackage>> GetUserDailyActivityList(DateTime activityDate)
         {
             if (_currentUser == null)
             {
                 throw new ApiException("Sistemde kayıtlı kullanıcı bulunamamıştır.");
             }
-            var userDailyActivityEntity = await _userDailyActivityEntityRepository.GetUserDailyActivityList(_currentUser.Id);
+            if (activityDate==null || activityDate==DateTime.MinValue || activityDate==DateTime.MaxValue)
+            {
+                 activityDate = DateTime.UtcNow.Date;
+            }
+           
+            var userDailyActivityEntity = await _userDailyActivityEntityRepository.GetUserDailyActivityList(_currentUser.Id, activityDate);
             return userDailyActivityEntity;
         }
     }

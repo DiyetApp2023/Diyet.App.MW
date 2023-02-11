@@ -13,6 +13,6 @@ namespace Appusion.Core.Common.Interface.Repositories
     {
         Task<UserDailyActivityEntity> GetUserDailyActivityEntity(long userId, ActivityType activityType);
 
-        Task<List<GetUserDailyActivityResponsePackage>> GetUserDailyActivityList(long userId);
+        Task<List<GetUserDailyActivityResponsePackage>> GetUserDailyActivityList(long userId, DateTime activityDate);
     }
 }

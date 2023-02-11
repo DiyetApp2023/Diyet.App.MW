@@ -99,9 +99,9 @@ namespace Appusion.Core.Services.Api.Controllers
         /// <returns></returns>
         [Route("api/dietplan/getuserdailyactivitylist")]
         [HttpGet]
-        public async Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList()
+        public async Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList([FromQuery] DateTime activityDate)
         {
-            return await _dietPlanService.GetUserDailyActivityList();
+            return await _dietPlanService.GetUserDailyActivityList(activityDate);
         }
     }
 }

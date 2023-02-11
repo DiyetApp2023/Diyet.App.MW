@@ -75,11 +75,11 @@ namespace Appusion.Core.Services.DietPlan
             });
         }
 
-        public async Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList()
+        public async Task<GenericServiceResult<List<GetUserDailyActivityResponsePackage>>> GetUserDailyActivityList(DateTime activityDate)
         {
             return await this.RunSafelyAsync(() =>
             {
-                return _dietPlanComponent.GetUserDailyActivityList().Result;
+                return _dietPlanComponent.GetUserDailyActivityList(activityDate).Result;
             });
         }
     }
