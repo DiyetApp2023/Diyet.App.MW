@@ -9,10 +9,12 @@ namespace Appusion.Core.Common.IoC
     {
         public static void InstallAppusionDietDbContext(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<DietDbContext>();
+
             services.AddDbContext<DietDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("AppusionMSSQLConnectionString"));
-            });
+            },ServiceLifetime.Transient);
         }
     }
 }

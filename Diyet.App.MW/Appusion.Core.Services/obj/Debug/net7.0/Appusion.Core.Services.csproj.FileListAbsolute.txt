@@ -15,11 +15,6 @@
 /Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/obj/Debug/net7.0/refint/Appusion.Core.Services.dll
 /Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/obj/Debug/net7.0/Appusion.Core.Services.pdb
 /Users/ahmettoprak/Documents/Diyet.App.MW/Diyet.App.MW/Appusion.Core.Services/obj/Debug/net7.0/ref/Appusion.Core.Services.dll
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.csproj.AssemblyReference.cache
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.AssemblyInfoInputs.cache
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.AssemblyInfo.cs
-C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.csproj.CoreCompileInputs.cache
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\bin\Debug\net7.0\Appusion.Core.Services.deps.json
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\bin\Debug\net7.0\Appusion.Core.Services.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\bin\Debug\net7.0\Appusion.Core.Services.pdb
@@ -27,6 +22,11 @@ C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\bi
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\bin\Debug\net7.0\Appusion.Core.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\bin\Debug\net7.0\Appusion.Core.Common.pdb
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\bin\Debug\net7.0\Appusion.Core.pdb
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.csproj.AssemblyReference.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.AssemblyInfoInputs.cache
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.AssemblyInfo.cs
+C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.csproj.CoreCompileInputs.cache
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.csproj.CopyComplete
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\Appusion.Core.Services.dll
 C:\Users\ahmett\source\repos\Diyet.App.MW\Diyet.App.MW\Appusion.Core.Services\obj\Debug\net7.0\refint\Appusion.Core.Services.dll

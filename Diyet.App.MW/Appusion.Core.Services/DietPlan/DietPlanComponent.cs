@@ -113,16 +113,16 @@ namespace Appusion.Core.Services.DietPlan
                     var userDietPlanMealDetailProductMapEntityList = _mapper.Map<List<UserDietPlanMealDetailProductMapRequestPackage>, List<UserDietPlanMealDetailProductMapEntity>>(saveUserDietMealPlanRequestPackage.ProductDetails);
                     if (userDietPlanMealDetailProductMapEntityList != null)
                     {
-                        userDietPlanMealDetailProductMapEntityList.ForEach(async userDietPlanMealDetailProductMapEntity =>
+                         userDietPlanMealDetailProductMapEntityList.ForEach(userDietPlanMealDetailProductMapEntity =>
                         {
-                            userDietPlanMealDetailProductMapEntity.UserDietPlanDetailId = userDietPlanDetailEntity.Id;
+                             userDietPlanMealDetailProductMapEntity.UserDietPlanDetailId = userDietPlanDetailEntity.Id;
                             if (userDietPlanMealDetailProductMapEntity.Id<=0)
                             {
-                                await _userDietPlanMealDetailProductMapEntityRepository.Insert(userDietPlanMealDetailProductMapEntity);
+                                 _userDietPlanMealDetailProductMapEntityRepository.Insert(userDietPlanMealDetailProductMapEntity);
                             }
                             else
                             {
-                                await _userDietPlanMealDetailProductMapEntityRepository.Update(userDietPlanMealDetailProductMapEntity);
+                                 _userDietPlanMealDetailProductMapEntityRepository.Update(userDietPlanMealDetailProductMapEntity);
 
                             }
                         });

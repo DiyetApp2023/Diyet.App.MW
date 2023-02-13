@@ -5,6 +5,7 @@ using Appusion.Core.Common.Interface.Repositories;
 using Appusion.Core.Common.RequestModels.DietPlan;
 using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels.DietPlan;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,18 +51,21 @@ namespace Appusion.Core.Common.Implementation.Repositories
                                 StartTime = userDietPlanDetail.StartTime,
                                 EndTime = userDietPlanDetail.EndTime,
                                 EstimatedCalorie = userDietPlanDetail.EstimatedCalorie,
-                                ProductDetails = new List<UserDietPlanMealDetailProductMapRequestPackage>
-                                {
-                                    new UserDietPlanMealDetailProductMapRequestPackage
-                                    {
-                                        Id = userDietPlanMealDetailProductMap.Id,
-                                        Order = userDietPlanMealDetailProductMap.Order,
-                                        Quantity = userDietPlanMealDetailProductMap.Quantity,
-                                        ProductId = userDietPlanMealDetailProductMap.ProductId,
-                                        UnitId = userDietPlanMealDetailProductMap.UnitId,
-                                    }
-                                }.ToList()
                             }).FirstOrDefault();
+
+            userDietMealPlanResponsePackage.ProductDetails = (from userDietPlanMealDetailProductMap in DbContext.UserDietPlanMealDetailProductMap
+                                                              where userDietPlanMealDetailProductMap.Id == userDietMealPlanResponsePackage.Id
+                                                              select new List<UserDietPlanMealDetailProductMapRequestPackage>
+                                                              {
+                                                                  new UserDietPlanMealDetailProductMapRequestPackage
+                                                                  {
+                                                                       Id = userDietPlanMealDetailProductMap.Id,
+                                                                       Order = userDietPlanMealDetailProductMap.Order,
+                                                                       Quantity = userDietPlanMealDetailProductMap.Quantity,
+                                                                       ProductId = userDietPlanMealDetailProductMap.ProductId,
+                                                                       UnitId = userDietPlanMealDetailProductMap.UnitId
+                                                                  }
+                                                              }).ToList();
             return userDietMealPlanResponsePackage;
         }
 

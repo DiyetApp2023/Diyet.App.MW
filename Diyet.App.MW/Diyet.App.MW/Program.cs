@@ -17,6 +17,7 @@ using Appusion.Core.Services.Meal;
 using Appusion.Core.Services.Product;
 using Appusion.Core.Services.DietPlan;
 using Appusion.Core.Common.Base;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,7 @@ builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 builder.Services.InstallJwtParameters(configuration);
 builder.Services.InstallAppusionDietDbContext(configuration);
+
 builder.Services.InstallMailSettings(configuration);
 builder.Services.InstallUserParameters(configuration);
 builder.Services.AddCors(p => p.AddPolicy("CorsPolicy", builder =>
