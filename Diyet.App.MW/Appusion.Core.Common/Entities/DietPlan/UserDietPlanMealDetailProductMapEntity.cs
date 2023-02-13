@@ -17,7 +17,7 @@ namespace Appusion.Core.Common.Entities.DietPlan
 
         public int UnitId { get; set; }
 
-        public float Quantity { get; set; }
+        public double Quantity { get; set; }
 
         public int Order { get; set; }
     }

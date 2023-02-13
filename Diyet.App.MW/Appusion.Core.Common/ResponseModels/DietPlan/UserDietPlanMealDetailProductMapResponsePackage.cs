@@ -13,7 +13,7 @@ namespace Appusion.Core.Common.ResponseModels.DietPlan
 
         public int UnitId { get; set; }
 
-        public float Quantity { get; set; }
+        public double Quantity { get; set; }
 
         public int Order { get; set; }
     }

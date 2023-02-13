@@ -17,9 +17,9 @@ namespace Appusion.Core.Common.RequestModels.User
 
         public Gender Gender  { get; set; }
 
-        public float Height { get; set; }
+        public double Height { get; set; }
 
-        public float Weight { get; set; }
+        public double Weight { get; set; }
 
         [Required]
         public DateTime BirthDate { get; set; }
