@@ -10,5 +10,13 @@ using System.Threading.Tasks;
 namespace Appusion.Core.Common.ResponseModels.DietPlan
 {
         public class GetUserDietMealPlanResponsePackage : SaveUserDietMealPlanRequestPackage
-        {}
+        {
+        public long PlanId { get; set; }
+
+        public string PlanName { get; set; }
+
+
+
+
     }
+}

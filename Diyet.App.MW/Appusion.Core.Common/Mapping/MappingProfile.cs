@@ -1,11 +1,14 @@
 ﻿using Appusion.Core.Common.Base;
 using Appusion.Core.Common.Entities.DietPlan;
+using Appusion.Core.Common.Entities.ExercisePlan;
 using Appusion.Core.Common.Entities.Meal;
 using Appusion.Core.Common.Entities.Product;
 using Appusion.Core.Common.Entities.User;
 using Appusion.Core.Common.RequestModels.DietPlan;
+using Appusion.Core.Common.RequestModels.ExercisePlan;
 using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels.DietPlan;
+using Appusion.Core.Common.ResponseModels.ExercisePlan;
 using Appusion.Core.Common.ResponseModels.Meal;
 using Appusion.Core.Common.ResponseModels.Product;
 using Appusion.Core.Common.ResponseModels.User;
@@ -45,6 +48,12 @@ namespace Appusion.Core.Common.Mapping
             CreateMap<UserDietPlanMealDetailProductMapRequestPackage, UserDietPlanMealDetailProductMapEntity>().ReverseMap();
 
             CreateMap<MealEntity, GetDefaultScheduledMealListResponsePackage>().ReverseMap();
+
+            CreateMap<ExercisePlanEntity, SaveExercisePlanRequestPackage>().ReverseMap();
+
+            CreateMap<SaveExercisePlanRequestPackage, ExercisePlanEntity>().ReverseMap();
+
+            CreateMap<ExerciseDefinitionEntity, GetAllExerciseListResponsePackage>().ReverseMap();
         }
     }
 }

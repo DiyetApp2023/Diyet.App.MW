@@ -1,4 +1,5 @@
 ﻿using Appusion.Core.Common.Entities.DietPlan;
+using Appusion.Core.Common.Entities.ExercisePlan;
 using Appusion.Core.Common.Entities.Meal;
 using Appusion.Core.Common.Entities.Product;
 using Appusion.Core.Common.Entities.User;
@@ -40,5 +41,10 @@ namespace Appusion.Core.Common.Implementation.DbContexts
         public DbSet<ActivityEntity> Activity { get; set; }
 
         public DbSet<UserSessionDetailEntity> UserSessionDetail { get; set; }
-    }
+
+        public DbSet<ExerciseDefinitionEntity> ExerciseDefinition { get; set; }
+
+        public DbSet<ExercisePlanEntity> ExercisePlan { get; set; }
+
+        public DbSet<UserExercisePlanMapEntity> UserExercisePlanMap { get; set; }    }
 }
