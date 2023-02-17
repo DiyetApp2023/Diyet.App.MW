@@ -18,6 +18,7 @@ using Appusion.Core.Services.Product;
 using Appusion.Core.Services.DietPlan;
 using Appusion.Core.Common.Base;
 using Microsoft.EntityFrameworkCore;
+using Appusion.Core.Services.ExercisePlan;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMealService, MealService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IDietPlanService, DietPlanService>();
+builder.Services.AddScoped<IExercisePlanService, ExercisePlanService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IDietPlanRepository, DietPlanRepository>();
 builder.Services.AddScoped<IUserDietPlanMapRepository, UserDietPlanMapRepository>();
@@ -71,6 +73,8 @@ builder.Services.AddScoped<IUserDietPlanDetailRepository,UserDietPlanDetailRepos
 builder.Services.AddScoped<IUserDietPlanMealDetailProductMapEntityRepository, UserDietPlanMealDetailProductMapEntityRepository>();
 builder.Services.AddScoped<IUserDailyActivityEntityRepository, UserDailyActivityEntityRepository>();
 builder.Services.AddScoped<IUserSessionDetailEntityRepository, UserSessionDetailEntityRepository>();
+builder.Services.AddScoped<IExercisePlanRepository, ExercisePlanRepository>();
+builder.Services.AddScoped<IUserExercisePlanMapRepository, UserExercisePlanMapRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<RestHelper>();
 builder.Services.AddScoped<RestClient>();
@@ -81,6 +85,7 @@ builder.Services.AddScoped<UserComponent>();
 builder.Services.AddScoped<MealComponent>();
 builder.Services.AddScoped<ProductComponent>();
 builder.Services.AddScoped<DietPlanComponent>();
+builder.Services.AddScoped<ExercisePlanComponent>();
 //builder.Services.AddScoped<CurrentUser>((serviceProvider) =>
 //{
 //    var httpContext = (serviceProvider.GetService(typeof(IHttpContextAccessor)) as IHttpContextAccessor)

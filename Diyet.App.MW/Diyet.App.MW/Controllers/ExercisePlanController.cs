@@ -44,7 +44,7 @@ namespace Appusion.Core.Services.Api.Controllers
         public async Task<GenericServiceResult<List<GetAllExerciseListResponsePackage>>> GetSearchedExerciseList([FromQuery] GetSearchedExerciseListRequestPackage getSearchedExerciseListRequestPackage)
         {
             return await _exercisePlanService.GetSearchedExerciseList(getSearchedExerciseListRequestPackage);
-        }
+        }   
 
         /// <summary>
         /// GetAllExerciseList

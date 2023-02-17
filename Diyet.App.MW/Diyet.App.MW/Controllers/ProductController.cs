@@ -43,8 +43,8 @@ namespace Appusion.Core.Services.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("api/product/getsearchedproductlist")]
-        [HttpPost]
-        public async Task<GenericServiceResult<List<GetAllProductListResponsePackage>>> GetSearchedProductList([FromBody] GetSearchedProductListRequestPackage getSearchedProductListRequestPackage)
+        [HttpGet]
+        public async Task<GenericServiceResult<List<GetAllProductListResponsePackage>>> GetSearchedProductList([FromQuery] GetSearchedProductListRequestPackage getSearchedProductListRequestPackage)
         {
             return await _productService.GetSearchedProductList(getSearchedProductListRequestPackage);
         }

@@ -7,7 +7,7 @@ namespace Appusion.Core.Common.Entities.ExercisePlan
     /// <summary>
     /// UserExercisePlanMapEntity
     /// </summary>
-    [Table("UserExercisePlanMap", Schema = "Diet")]
+    [Table("UserExercisePlanMap", Schema = "Exercise")]
     public class UserExercisePlanMapEntity : EntityBase
     {
         public long Id { get; set; }

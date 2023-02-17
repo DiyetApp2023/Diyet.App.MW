@@ -20,7 +20,7 @@ namespace Appusion.Core.Common.Implementation.Repositories
             var exercisePlanEntity = (from exercisePlan in DbContext.ExercisePlan
                                   join userExercisePlanMap in DbContext.UserExercisePlanMap on exercisePlan.Id equals userExercisePlanMap.ExercisePlanId
                                   where (exercisePlan.IsActive && userExercisePlanMap.UserId == userId)
-                                  where (exercisePlan.StartDate <= DateTime.UtcNow && exercisePlan.EndDate >= DateTime.UtcNow)
+                                  where (exercisePlan.StartDate <= DateTime.Now && exercisePlan.EndDate >= DateTime.Now)
                                   orderby exercisePlan.CreateDate descending
                                   select exercisePlan).FirstOrDefault();
             return exercisePlanEntity;
