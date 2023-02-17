@@ -19,5 +19,6 @@ namespace Appusion.Core.Common.Interface.Services
         Task<GenericServiceResult<SaveExercisePlanResponsePackage>> SaveExercisePlan(SaveExercisePlanRequestPackage saveExercisePlanRequestPackage);
         Task<GenericServiceResult<List<GetAllExerciseListResponsePackage>>> GetAllExerciseList();
         Task<GenericServiceResult<List<GetAllExerciseListResponsePackage>>> GetSearchedExerciseList(GetSearchedExerciseListRequestPackage getSearchedExerciseListRequestPackage);
+        Task<GenericServiceResult> SaveUserExercises(SaveUserExercisesRequestPackage userExerciseList);
     }
 }

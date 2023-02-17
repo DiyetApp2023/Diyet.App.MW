@@ -46,5 +46,8 @@ namespace Appusion.Core.Common.Implementation.DbContexts
 
         public DbSet<ExercisePlanEntity> ExercisePlan { get; set; }
 
-        public DbSet<UserExercisePlanMapEntity> UserExercisePlanMap { get; set; }    }
+        public DbSet<UserExercisePlanMapEntity> UserExercisePlanMap { get; set; }
+
+        public DbSet<UserExerciseEntity> UserExercise { get; set; }
+    }
 }

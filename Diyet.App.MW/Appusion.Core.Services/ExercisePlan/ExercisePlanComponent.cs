@@ -25,16 +25,19 @@ namespace Appusion.Core.Services.ExercisePlan
         private readonly CurrentUser _currentUser;
         private readonly IExercisePlanRepository _exercisePlanRepository;
         private readonly IUserExercisePlanMapRepository _userExercisePlanMapRepository;
-
+        private readonly IUserExerciseRepository _userExerciseRepository;
+        
         public ExercisePlanComponent(IMapper mapper, 
                                     CurrentUser currentUser, 
                                     IExercisePlanRepository exercisePlanRepository, 
-                                    IUserExercisePlanMapRepository userExercisePlanMapRepository)
+                                    IUserExercisePlanMapRepository userExercisePlanMapRepository,
+                                    IUserExerciseRepository userExerciseRepository)
         {
             _mapper = mapper;
             _currentUser = currentUser;
             _exercisePlanRepository= exercisePlanRepository;
             _userExercisePlanMapRepository = userExercisePlanMapRepository;
+            _userExerciseRepository = userExerciseRepository;
         }
 
         public async Task<SaveExercisePlanRequestPackage> GetExercisePlan()
@@ -86,6 +89,17 @@ namespace Appusion.Core.Services.ExercisePlan
         {
             var searchedExerciseEntityList = await _exercisePlanRepository.GetSearchedExerciseList(getSearchedExerciseListRequestPackage.SearchedExercise);
             return _mapper.Map<List<ExerciseDefinitionEntity>, List<GetAllExerciseListResponsePackage>>(searchedExerciseEntityList);
+        }
+
+        public async Task SaveUserExercises(SaveUserExercisesRequestPackage saveUserExercisesRequests)
+        {
+            var userExercisePlanMapEntity = await _userExercisePlanMapRepository.GetUserExercisePlanMapEntity(_currentUser.Id);
+            var userExerciseEntities = _mapper.Map<List<UserExerciseInfo>, List<UserExerciseEntity>>(saveUserExercisesRequests.UserExerciseInfoList);
+            foreach (var item in userExerciseEntities)
+            {
+                item.UserExercisePlanMapId =userExercisePlanMapEntity.Id;
+                await _userExerciseRepository.Insert(item);
+            }
         }
     }
 }

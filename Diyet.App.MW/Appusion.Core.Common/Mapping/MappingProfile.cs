@@ -54,6 +54,8 @@ namespace Appusion.Core.Common.Mapping
             CreateMap<SaveExercisePlanRequestPackage, ExercisePlanEntity>().ReverseMap();
 
             CreateMap<ExerciseDefinitionEntity, GetAllExerciseListResponsePackage>().ReverseMap();
+            
+            CreateMap<UserExerciseInfo, UserExerciseEntity>().ReverseMap();
         }
     }
 }

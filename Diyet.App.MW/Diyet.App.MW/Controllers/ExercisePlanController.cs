@@ -19,16 +19,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace Appusion.Core.Services.Api.Controllers
 {
     /// <summary>
-    /// ProductController
+    /// ExercisePlanController
     /// </summary>
     public class ExercisePlanController : System.Web.Http.ApiController
     {
         private readonly IExercisePlanService _exercisePlanService;
 
         /// <summary>
-        /// ctor
+        /// ExercisePlanController
         /// </summary>
-        /// <param name="mealService"></param>
+        /// <param name="exercisePlanService"></param>
         public ExercisePlanController(IExercisePlanService exercisePlanService)
         {
             _exercisePlanService = exercisePlanService;
@@ -77,6 +77,17 @@ namespace Appusion.Core.Services.Api.Controllers
         public async Task<GenericServiceResult<SaveExercisePlanRequestPackage>> GetExercisePlan()
         {
             return await _exercisePlanService.GetExercisePlan();
+        }
+
+        /// <summary>
+        /// SaveUserExercises
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/exercise/saveuserexercises")]
+        [HttpPost]
+        public async Task<GenericServiceResult> SaveUserExercises([FromBody] SaveUserExercisesRequestPackage userExerciseList)
+        {
+            return await _exercisePlanService.SaveUserExercises(userExerciseList);
         }
     }
 }

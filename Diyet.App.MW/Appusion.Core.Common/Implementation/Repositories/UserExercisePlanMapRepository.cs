@@ -14,5 +14,11 @@ namespace Appusion.Core.Common.Implementation.Repositories
         public UserExercisePlanMapRepository(DietDbContext context) : base(context)
         {
         }
+
+        public async Task<UserExercisePlanMapEntity> GetUserExercisePlanMapEntity(long userId)
+        {
+            var result = DbContext.UserExercisePlanMap.Where(x => x.UserId == userId).FirstOrDefault();
+            return result;
+        }
     }
 }

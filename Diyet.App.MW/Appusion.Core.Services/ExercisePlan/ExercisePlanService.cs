@@ -54,5 +54,13 @@ namespace Appusion.Core.Services.ExercisePlan
                 return _exercisePlanComponent.SaveExercisePlan(saveExercisePlanRequestPackage).Result;
             });
         }
+
+        public async Task<GenericServiceResult> SaveUserExercises(SaveUserExercisesRequestPackage saveUserExercisesRequests)
+        {
+            return await this.RunSafelyAsync(() =>
+            {
+                return _exercisePlanComponent.SaveUserExercises(saveUserExercisesRequests);
+            });
+        }
     }
 }

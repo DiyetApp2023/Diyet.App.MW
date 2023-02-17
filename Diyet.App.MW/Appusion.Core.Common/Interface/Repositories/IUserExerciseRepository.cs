@@ -1,4 +1,7 @@
 ﻿using Appusion.Core.Common.Entities.ExercisePlan;
+using Appusion.Core.Common.Entities.User;
+using Appusion.Core.Common.RequestModels.User;
+using Appusion.Core.Common.ResponseModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace Appusion.Core.Common.Interface.Repositories
 {
-    public interface IUserExercisePlanMapRepository: IGenericRepository<UserExercisePlanMapEntity>
+    public interface IUserExerciseRepository : IGenericRepository<UserExerciseEntity>
     {
-        Task<UserExercisePlanMapEntity> GetUserExercisePlanMapEntity(long userId);
+       
     }
+
 }
