@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace Appusion.Core.Common.ResponseModels.DietPlan
 {
-        public class GetUserDietMealPlanResponsePackage : SaveUserDietMealPlanRequestPackage
+        public class GetUserDietMealPlanResponsePackage 
         {
         public long PlanId { get; set; }
 
         public string PlanName { get; set; }
 
-
-
-
+        public List<UserMealDetailResponsePackage> MealDetails { get; set; }
     }
 }

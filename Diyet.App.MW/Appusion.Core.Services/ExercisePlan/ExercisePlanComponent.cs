@@ -94,11 +94,19 @@ namespace Appusion.Core.Services.ExercisePlan
         public async Task SaveUserExercises(SaveUserExercisesRequestPackage saveUserExercisesRequests)
         {
             var userExercisePlanMapEntity = await _userExercisePlanMapRepository.GetUserExercisePlanMapEntity(_currentUser.Id);
-            var userExerciseEntities = _mapper.Map<List<UserExerciseInfo>, List<UserExerciseEntity>>(saveUserExercisesRequests.UserExerciseInfoList);
-            foreach (var item in userExerciseEntities)
+            foreach (var userExerciseInfo in saveUserExercisesRequests.UserExerciseInfoList)
             {
-                item.UserExercisePlanMapId =userExercisePlanMapEntity.Id;
-                await _userExerciseRepository.Insert(item);
+                var userExerciseEntity = await _userExerciseRepository.GetUserExerciseEntity(userExercisePlanMapEntity.Id, userExerciseInfo.ExerciseId);
+                if (userExerciseEntity==null)
+                {
+                    userExerciseEntity = _mapper.Map<UserExerciseInfo, UserExerciseEntity>(userExerciseInfo);
+                    userExerciseEntity.UserExercisePlanMapId = userExercisePlanMapEntity.Id;
+                    await _userExerciseRepository.Insert(userExerciseEntity);
+                }
+                else
+                {
+                    await _userExerciseRepository.Update(userExerciseEntity);
+                }
             }
         }
     }

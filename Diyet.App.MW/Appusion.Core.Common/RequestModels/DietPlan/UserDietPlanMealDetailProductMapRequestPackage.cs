@@ -12,6 +12,10 @@ namespace Appusion.Core.Common.RequestModels.DietPlan
 
         public int ProductId { get; set; }
 
+        public string ProductName { get; set; }
+
+        public string UnitName { get; set; }
+
         public int UnitId { get; set; }
 
         public double Quantity { get; set; }

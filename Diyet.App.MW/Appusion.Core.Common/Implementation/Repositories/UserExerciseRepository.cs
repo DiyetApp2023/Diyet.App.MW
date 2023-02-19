@@ -17,5 +17,10 @@ namespace Appusion.Core.Common.Implementation.Repositories
         {
         }
 
+        public async Task<UserExerciseEntity> GetUserExerciseEntity(long userExercisePlanMapId, long exerciseId)
+        {
+                var userExerciseEntity = DbContext.UserExercise.Where(ue => ue.UserExercisePlanMapId == userExercisePlanMapId && ue.ExerciseId == exerciseId).FirstOrDefault();
+                return userExerciseEntity;
+        }
     }
 }

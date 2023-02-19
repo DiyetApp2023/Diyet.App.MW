@@ -12,7 +12,6 @@ namespace Appusion.Core.Common.Interface.Repositories
 {
     public interface IUserExerciseRepository : IGenericRepository<UserExerciseEntity>
     {
-       
+        Task<UserExerciseEntity> GetUserExerciseEntity(long userExercisePlanMapId, long exerciseId);
     }
-
 }

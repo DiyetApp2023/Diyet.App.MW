@@ -75,7 +75,7 @@ builder.Services.AddScoped<IUserDailyActivityEntityRepository, UserDailyActivity
 builder.Services.AddScoped<IUserSessionDetailEntityRepository, UserSessionDetailEntityRepository>();
 builder.Services.AddScoped<IExercisePlanRepository, ExercisePlanRepository>();
 builder.Services.AddScoped<IUserExercisePlanMapRepository, UserExercisePlanMapRepository>();
-builder.Services.AddScoped<IUserExerciseRepository, UserExerciseRepository>();
+builder.Services.AddTransient<IUserExerciseRepository, UserExerciseRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<RestHelper>();
 builder.Services.AddScoped<RestClient>();

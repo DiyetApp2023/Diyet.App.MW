@@ -5,6 +5,7 @@ using Appusion.Core.Common.Interface.Repositories;
 using Appusion.Core.Common.RequestModels.DietPlan;
 using Appusion.Core.Common.RequestModels.User;
 using Appusion.Core.Common.ResponseModels.DietPlan;
+using Appusion.Core.Common.ResponseModels.Meal;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,39 +35,44 @@ namespace Appusion.Core.Common.Implementation.Repositories
 
         public async Task<GetUserDietMealPlanResponsePackage> GetActiveUserDietMealPlan(long userId)
         {
-            var userDietMealPlanResponsePackage = (from dietPlan in DbContext.DietPlan
-                                                   join userDietPlanMap in DbContext.UserDietPlanMap on dietPlan.Id equals userDietPlanMap.PlanId
-                                                   join userDietPlanDetail in DbContext.UserDietPlanDetail on dietPlan.Id equals userDietPlanDetail.PlanId
-                                                   join meal in DbContext.Meal on userDietPlanDetail.MealId equals meal.Id
-                                                   join userDietPlanMealDetailProductMap in DbContext.UserDietPlanMealDetailProductMap on userDietPlanDetail.Id equals userDietPlanMealDetailProductMap.UserDietPlanDetailId
-                                                   join product in DbContext.Product on userDietPlanMealDetailProductMap.ProductId equals product.Id
-                                                   where dietPlan.IsActive && userDietPlanMap.UserId == userId
-                                                   where dietPlan.StartDate <= DateTime.UtcNow && dietPlan.EndDate >= DateTime.UtcNow
-                                                   orderby dietPlan.CreateDate descending
-                                                   select new GetUserDietMealPlanResponsePackage()
-                                                   {
-                                                       Id = userDietPlanDetail.Id,
-                                                       PlanId = userDietPlanDetail.PlanId,
-                                                       MealId = userDietPlanDetail.MealId,
-                                                       StartTime = userDietPlanDetail.StartTime,
-                                                       EndTime = userDietPlanDetail.EndTime,
-                                                       EstimatedCalorie = userDietPlanDetail.EstimatedCalorie
-                                                   }).FirstOrDefault();
-            if (userDietMealPlanResponsePackage != null)
+            var result = new GetUserDietMealPlanResponsePackage();
+            var currentDietPlan = (from dietPlan in DbContext.DietPlan
+                                   join userDietPlanMap in DbContext.UserDietPlanMap on dietPlan.Id equals userDietPlanMap.PlanId
+                                   where dietPlan.IsActive && userDietPlanMap.UserId == userId
+                                   where dietPlan.StartDate <= DateTime.UtcNow && dietPlan.EndDate >= DateTime.UtcNow
+                                   orderby dietPlan.CreateDate descending
+                                   select dietPlan).FirstOrDefault();
+            if (currentDietPlan != null)
             {
-                userDietMealPlanResponsePackage.ProductDetails = (from userDietPlanMealDetailProductMap in DbContext.UserDietPlanMealDetailProductMap
-                                                                  where userDietPlanMealDetailProductMap.UserDietPlanDetailId == userDietMealPlanResponsePackage.Id
-                                                                  select new UserDietPlanMealDetailProductMapRequestPackage
-                                                                  {
-                                                                      Id = userDietPlanMealDetailProductMap.Id,
-                                                                      Order = userDietPlanMealDetailProductMap.Order,
-                                                                      Quantity = userDietPlanMealDetailProductMap.Quantity,
-                                                                      ProductId = userDietPlanMealDetailProductMap.ProductId,
-                                                                      UnitId = userDietPlanMealDetailProductMap.UnitId
-                                                                  }).ToList();
+                result.PlanId = currentDietPlan.Id;
+                result.PlanName = currentDietPlan.PlanName;
+                result.MealDetails = (from userDietPlanDetail in DbContext.UserDietPlanDetail
+                                      join meal in DbContext.Meal on userDietPlanDetail.MealId equals meal.Id
+                                      where userDietPlanDetail.PlanId == currentDietPlan.Id
+                                      select new UserMealDetailResponsePackage
+                                      {
+                                          MealId = meal.Id,
+                                          MealName = meal.MealName,
+                                          StartTime = meal.StartTime,
+                                          EndTime = meal.EndTime,
+                                          EstimatedCalorie = userDietPlanDetail.EstimatedCalorie,
+                                          ProductDetails = (from userDietPlanMealDetailProductMap in DbContext.UserDietPlanMealDetailProductMap
+                                                            join product in DbContext.Product on userDietPlanMealDetailProductMap.ProductId equals product.Id
+                                                            join productUnit in DbContext.ProductUnit on userDietPlanMealDetailProductMap.UnitId equals productUnit.Id
+                                                            where userDietPlanMealDetailProductMap.UserDietPlanDetailId == userDietPlanDetail.Id
+                                                            select new UserDietPlanMealDetailProductMapRequestPackage
+                                                            {
+                                                                Id = userDietPlanMealDetailProductMap.Id,
+                                                                Order = userDietPlanMealDetailProductMap.Order,
+                                                                Quantity = userDietPlanMealDetailProductMap.Quantity,
+                                                                ProductId = userDietPlanMealDetailProductMap.ProductId,
+                                                                ProductName = product.ProductName,
+                                                                UnitName = productUnit.UnitName,
+                                                                UnitId = userDietPlanMealDetailProductMap.UnitId
+                                                            }).ToList()
+                                      }).ToList();
             }
-
-            return userDietMealPlanResponsePackage;
+            return result;
         }
 
         public async Task<List<DietPlanEntity>> GetAllDietPlanEntityList()
